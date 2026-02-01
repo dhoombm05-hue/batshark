@@ -45,7 +45,7 @@ const PartnersSection = () => {
           {[...partnerLogos, ...partnerLogos].map((partner, index) => (
             <div
               key={`${partner.name}-${index}`}
-              className="flex-shrink-0 h-12 w-32 flex items-center justify-center grayscale hover:grayscale-0 transition-all opacity-60 hover:opacity-100"
+              className="flex-shrink-0 h-12 w-32 flex items-center justify-center hover:scale-110 transition-all opacity-80 hover:opacity-100"
             >
               <img
                 src={partner.logo}
