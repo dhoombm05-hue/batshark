@@ -1,40 +1,69 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Check, X } from "lucide-react";
-
-const features = [
-  { name: "عدد الشاشات", basic: "1", pro: "5", enterprise: "غير محدود" },
-  { name: "ساعات العرض اليومية", basic: "10", pro: "24", enterprise: "24" },
-  { name: "الدعم الفني", basic: "أساسي", pro: "على مدار الساعة", enterprise: "مدير حساب مخصص" },
-  { name: "التقارير", basic: "شهرية", pro: "أسبوعية", enterprise: "مخصصة" },
-  { name: "تصاميم إعلانية", basic: "1", pro: "3", enterprise: "غير محدود" },
-  { name: "تحليلات متقدمة", basic: false, pro: true, enterprise: true },
-  { name: "أولوية في المواقع", basic: false, pro: true, enterprise: true },
-  { name: "API للتكامل", basic: false, pro: false, enterprise: true },
-  { name: "عقود مرنة", basic: false, pro: false, enterprise: true },
-];
+import { Check, Sparkles, Crown, Building2 } from "lucide-react";
 
 const plans = [
-  { id: "basic", name: "أساسي", price: "999", period: "شهرياً", popular: false },
-  { id: "pro", name: "احترافي", price: "2,499", period: "شهرياً", popular: true },
-  { id: "enterprise", name: "المؤسسات", price: "تواصل معنا", period: "", popular: false },
+  {
+    id: "basic",
+    name: "أساسي",
+    icon: Sparkles,
+    price: "999",
+    period: "شهرياً",
+    description: "مثالي للبدء في عالم الإعلانات الرقمية",
+    features: [
+      "شاشة واحدة",
+      "10 ساعات عرض يومياً",
+      "دعم فني أساسي",
+      "تقارير شهرية",
+      "تصميم إعلان واحد",
+    ],
+    popular: false,
+    gradient: "from-blue-500 to-cyan-500",
+  },
+  {
+    id: "pro",
+    name: "احترافي",
+    icon: Crown,
+    price: "2,499",
+    period: "شهرياً",
+    description: "الأكثر شعبية للشركات المتوسطة",
+    features: [
+      "5 شاشات",
+      "24 ساعة عرض يومياً",
+      "دعم فني على مدار الساعة",
+      "تقارير أسبوعية",
+      "3 تصاميم إعلانية",
+      "تحليلات متقدمة",
+      "أولوية في المواقع",
+    ],
+    popular: true,
+    gradient: "from-purple-500 to-pink-500",
+  },
+  {
+    id: "enterprise",
+    name: "المؤسسات",
+    icon: Building2,
+    price: "تواصل معنا",
+    period: "",
+    description: "حلول مخصصة للشركات الكبرى",
+    features: [
+      "شاشات غير محدودة",
+      "عرض حصري",
+      "مدير حساب مخصص",
+      "تقارير مخصصة",
+      "تصاميم غير محدودة",
+      "API للتكامل",
+      "عقود مرنة",
+    ],
+    popular: false,
+    gradient: "from-amber-500 to-orange-500",
+  },
 ];
 
 const PricingSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const renderFeatureValue = (value: string | boolean) => {
-    if (typeof value === "boolean") {
-      return value ? (
-        <Check className="w-5 h-5 text-primary mx-auto" />
-      ) : (
-        <X className="w-5 h-5 text-muted-foreground/30 mx-auto" />
-      );
-    }
-    return <span className="text-foreground">{value}</span>;
-  };
 
   return (
     <section id="pricing" className="section-padding bg-card" ref={ref}>
@@ -45,100 +74,80 @@ const PricingSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="heading-lg mb-6">باقات الاشتراك</h2>
+          <span className="inline-block px-4 py-2 rounded-full bg-accent-soft text-sm font-medium text-foreground mb-4">
+            💎 باقات مرنة
+          </span>
+          <h2 className="heading-lg mb-4">اختر الباقة المناسبة لك</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            اختر الباقة المناسبة لاحتياجاتك وابدأ رحلتك الإعلانية
+            باقات متنوعة تناسب جميع الأحجام والميزانيات
           </p>
         </motion.div>
 
-        {/* Pricing Table */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="overflow-x-auto"
-        >
-          <table className="w-full min-w-[700px] border-collapse">
-            {/* Header with plans */}
-            <thead>
-              <tr>
-                <th className="p-4 text-right border-b border-border bg-background rounded-tr-2xl">
-                  <span className="text-muted-foreground">المميزات</span>
-                </th>
-                {plans.map((plan, index) => (
-                  <th
-                    key={plan.id}
-                    className={`p-6 text-center border-b border-border relative ${
-                      plan.popular 
-                        ? "bg-primary/10 border-x border-t border-primary/30" 
-                        : "bg-background"
-                    } ${index === plans.length - 1 ? "rounded-tl-2xl" : ""}`}
-                  >
-                    {plan.popular && (
-                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
-                        الأكثر شعبية
-                      </div>
-                    )}
-                    <div className="text-xl font-bold mb-2">{plan.name}</div>
-                    <div className="flex items-baseline justify-center gap-1">
-                      <span className={`text-3xl font-bold ${plan.popular ? "text-primary" : "text-foreground"}`}>
-                        {plan.price}
-                      </span>
-                      {plan.period && (
-                        <span className="text-muted-foreground text-sm">ر.س / {plan.period}</span>
-                      )}
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {plans.map((plan, index) => (
+            <motion.div
+              key={plan.id}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              className={`relative rounded-3xl p-8 transition-all duration-300 hover:scale-105 ${
+                plan.popular
+                  ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-xl"
+                  : "bg-background border border-border hover:shadow-card"
+              }`}
+            >
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white text-purple-600 text-sm font-bold rounded-full shadow-lg">
+                  ⭐ الأكثر شعبية
+                </div>
+              )}
+
+              {/* Icon */}
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${
+                plan.popular ? "bg-white/20" : `bg-gradient-to-br ${plan.gradient}`
+              }`}>
+                <plan.icon className={`w-7 h-7 ${plan.popular ? "text-white" : "text-white"}`} />
+              </div>
+
+              <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+              <p className={`text-sm mb-6 ${plan.popular ? "text-white/80" : "text-muted-foreground"}`}>
+                {plan.description}
+              </p>
+
+              <div className="flex items-baseline gap-2 mb-8">
+                <span className="text-4xl font-bold">{plan.price}</span>
+                {plan.period && (
+                  <span className={plan.popular ? "text-white/70" : "text-muted-foreground"}>
+                    ر.س / {plan.period}
+                  </span>
+                )}
+              </div>
+
+              <ul className="space-y-4 mb-8">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-3">
+                    <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
+                      plan.popular ? "bg-white/20" : "bg-green-100"
+                    }`}>
+                      <Check className={`w-3 h-3 ${plan.popular ? "text-white" : "text-green-600"}`} />
                     </div>
-                  </th>
+                    <span className={plan.popular ? "text-white/90" : "text-foreground"}>{feature}</span>
+                  </li>
                 ))}
-              </tr>
-            </thead>
+              </ul>
 
-            {/* Features rows */}
-            <tbody>
-              {features.map((feature, index) => (
-                <tr key={feature.name} className="group">
-                  <td className="p-4 text-right border-b border-border bg-background group-hover:bg-muted/30 transition-colors">
-                    <span className="text-foreground">{feature.name}</span>
-                  </td>
-                  <td className="p-4 text-center border-b border-border bg-background group-hover:bg-muted/30 transition-colors">
-                    {renderFeatureValue(feature.basic)}
-                  </td>
-                  <td className={`p-4 text-center border-b border-border border-x border-primary/30 bg-primary/5 group-hover:bg-primary/10 transition-colors`}>
-                    {renderFeatureValue(feature.pro)}
-                  </td>
-                  <td className="p-4 text-center border-b border-border bg-background group-hover:bg-muted/30 transition-colors">
-                    {renderFeatureValue(feature.enterprise)}
-                  </td>
-                </tr>
-              ))}
-
-              {/* CTA row */}
-              <tr>
-                <td className="p-4 bg-background rounded-br-2xl"></td>
-                {plans.map((plan, index) => (
-                  <td
-                    key={`cta-${plan.id}`}
-                    className={`p-6 text-center ${
-                      plan.popular 
-                        ? "bg-primary/10 border-x border-b border-primary/30" 
-                        : "bg-background"
-                    } ${index === plans.length - 1 ? "rounded-bl-2xl" : ""}`}
-                  >
-                    <button
-                      className={`w-full py-3 px-6 rounded-full font-medium transition-all hover:scale-105 ${
-                        plan.popular
-                          ? "bg-primary text-primary-foreground hover:opacity-90"
-                          : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                      }`}
-                    >
-                      اختر الباقة
-                    </button>
-                  </td>
-                ))}
-              </tr>
-            </tbody>
-          </table>
-        </motion.div>
+              <button
+                className={`w-full py-4 rounded-2xl font-semibold text-lg transition-all hover:scale-105 ${
+                  plan.popular
+                    ? "bg-white text-purple-600 hover:bg-white/90"
+                    : "bg-accent-gradient text-white shadow-lg"
+                }`}
+              >
+                اختر الباقة
+              </button>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
