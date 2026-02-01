@@ -4,9 +4,8 @@ import { useRef, useEffect, useState } from "react";
 
 const stats = [
   { value: 500, suffix: "+", label: "شاشة إعلانية" },
-  { value: 50, suffix: "+", label: "مدينة" },
-  { value: 10, suffix: "M+", label: "مشاهدة يومية" },
-  { value: 200, suffix: "+", label: "عميل راضٍ" },
+  { value: 300, suffix: "+", label: "محل تجاري" },
+  { value: 1, suffix: "M+", label: "زيارة للصفحة" },
 ];
 
 const AnimatedCounter = ({ end, suffix, inView }: { end: number; suffix: string; inView: boolean }) => {
@@ -44,9 +43,9 @@ const StatsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-primary-brown" ref={ref}>
+    <section className="section-padding bg-primary" ref={ref}>
       <div className="container mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}

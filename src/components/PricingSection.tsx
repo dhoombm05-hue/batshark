@@ -25,13 +25,6 @@ const plans = [
     features: ["50 شاشة", "جميع المناطق", "تقارير مفصلة", "دعم مخصص 24/7", "تحليلات متقدمة", "مدير حساب"],
     popular: false,
   },
-  {
-    name: "مخصص",
-    price: "مخصص",
-    description: "صمم باقتك الخاصة لتلبية احتياجاتك الإعلانية الفريدة.",
-    features: ["عدد غير محدود", "تغطية كاملة", "تقارير حسب الطلب", "دعم VIP", "حلول مخصصة", "شراكة استراتيجية"],
-    popular: false,
-  },
 ];
 
 const PricingSection = () => {
@@ -53,7 +46,7 @@ const PricingSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {plans.map((plan, index) => (
             <motion.div
               key={plan.name}
