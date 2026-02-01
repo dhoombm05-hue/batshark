@@ -27,7 +27,7 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-xl border-b border-border" : ""
+        isScrolled ? "bg-background/90 backdrop-blur-xl shadow-soft" : ""
       }`}
     >
       <div className="container mx-auto px-6">
@@ -42,14 +42,14 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                className="text-muted-foreground hover:text-foreground transition-colors font-medium"
               >
                 {link.name}
               </a>
             ))}
             <a
               href="#pricing"
-              className="px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all hover:scale-105"
+              className="px-6 py-2.5 rounded-xl bg-accent-gradient text-white font-medium hover:opacity-90 transition-all hover:scale-105 shadow-lg"
             >
               ابدأ الآن
             </a>
@@ -80,7 +80,7 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors py-2"
+                  className="text-muted-foreground hover:text-foreground transition-colors py-2 font-medium"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
@@ -88,7 +88,7 @@ const Navbar = () => {
               ))}
               <a
                 href="#pricing"
-                className="mt-4 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium text-center"
+                className="mt-4 px-6 py-3 rounded-xl bg-accent-gradient text-white font-medium text-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 ابدأ الآن
