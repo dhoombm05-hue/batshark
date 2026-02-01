@@ -1,63 +1,36 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Check, Sparkles, Crown, Building2 } from "lucide-react";
+import { Check } from "lucide-react";
 
 const plans = [
   {
-    id: "basic",
     name: "أساسي",
-    icon: Sparkles,
-    price: "999",
-    period: "شهرياً",
-    description: "مثالي للبدء في عالم الإعلانات الرقمية",
-    features: [
-      "شاشة واحدة",
-      "10 ساعات عرض يومياً",
-      "دعم فني أساسي",
-      "تقارير شهرية",
-      "تصميم إعلان واحد",
-    ],
+    price: "50",
+    description: "باقة مثالية للشركات الناشئة لعرض إعلاناتهم.",
+    features: ["5 شاشات", "منطقة واحدة", "تقارير أساسية", "دعم عبر البريد"],
     popular: false,
-    gradient: "from-blue-500 to-cyan-500",
   },
   {
-    id: "pro",
-    name: "احترافي",
-    icon: Crown,
-    price: "2,499",
-    period: "شهرياً",
-    description: "الأكثر شعبية للشركات المتوسطة",
-    features: [
-      "5 شاشات",
-      "24 ساعة عرض يومياً",
-      "دعم فني على مدار الساعة",
-      "تقارير أسبوعية",
-      "3 تصاميم إعلانية",
-      "تحليلات متقدمة",
-      "أولوية في المواقع",
-    ],
+    name: "مميز",
+    price: "120",
+    description: "حلول متكاملة للشركات المتوسطة لزيادة الوعي بالعلامة التجارية.",
+    features: ["15 شاشة", "3 مناطق", "تقارير متقدمة", "دعم سريع", "تحليلات الجمهور"],
     popular: true,
-    gradient: "from-purple-500 to-pink-500",
   },
   {
-    id: "enterprise",
-    name: "المؤسسات",
-    icon: Building2,
-    price: "تواصل معنا",
-    period: "",
-    description: "حلول مخصصة للشركات الكبرى",
-    features: [
-      "شاشات غير محدودة",
-      "عرض حصري",
-      "مدير حساب مخصص",
-      "تقارير مخصصة",
-      "تصاميم غير محدودة",
-      "API للتكامل",
-      "عقود مرنة",
-    ],
+    name: "احترافي",
+    price: "250",
+    description: "خدمات مخصصة للشركات الكبرى لتحقيق أهداف إعلانية طموحة.",
+    features: ["50 شاشة", "جميع المناطق", "تقارير مفصلة", "دعم مخصص 24/7", "تحليلات متقدمة", "مدير حساب"],
     popular: false,
-    gradient: "from-amber-500 to-orange-500",
+  },
+  {
+    name: "مخصص",
+    price: "مخصص",
+    description: "صمم باقتك الخاصة لتلبية احتياجاتك الإعلانية الفريدة.",
+    features: ["عدد غير محدود", "تغطية كاملة", "تقارير حسب الطلب", "دعم VIP", "حلول مخصصة", "شراكة استراتيجية"],
+    popular: false,
   },
 ];
 
@@ -66,7 +39,7 @@ const PricingSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="pricing" className="section-padding bg-card" ref={ref}>
+    <section id="pricing" className="section-padding bg-background" ref={ref}>
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -74,77 +47,69 @@ const PricingSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-accent-soft text-sm font-medium text-foreground mb-4">
-            💎 باقات مرنة
-          </span>
-          <h2 className="heading-lg mb-4">اختر الباقة المناسبة لك</h2>
+          <h2 className="heading-lg text-foreground mb-4">اشتراكات</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            باقات متنوعة تناسب جميع الأحجام والميزانيات
+            اختر الباقة المناسبة لاحتياجاتك
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
           {plans.map((plan, index) => (
             <motion.div
-              key={plan.id}
-              initial={{ opacity: 0, y: 40 }}
+              key={plan.name}
+              initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className={`relative rounded-3xl p-8 transition-all duration-300 hover:scale-105 ${
-                plan.popular
-                  ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-xl"
-                  : "bg-background border border-border hover:shadow-card"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className={`relative rounded-2xl p-6 transition-all hover:shadow-elevated ${
+                plan.popular 
+                  ? "bg-primary text-primary-foreground shadow-card" 
+                  : "bg-card border border-border hover:border-primary/30"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-white text-purple-600 text-sm font-bold rounded-full shadow-lg">
-                  ⭐ الأكثر شعبية
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-background text-primary text-sm font-semibold rounded-full border border-border">
+                  الأكثر طلباً
                 </div>
               )}
 
-              {/* Icon */}
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${
-                plan.popular ? "bg-white/20" : `bg-gradient-to-br ${plan.gradient}`
-              }`}>
-                <plan.icon className={`w-7 h-7 ${plan.popular ? "text-white" : "text-white"}`} />
-              </div>
-
-              <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-              <p className={`text-sm mb-6 ${plan.popular ? "text-white/80" : "text-muted-foreground"}`}>
-                {plan.description}
-              </p>
-
-              <div className="flex items-baseline gap-2 mb-8">
-                <span className="text-4xl font-bold">{plan.price}</span>
-                {plan.period && (
-                  <span className={plan.popular ? "text-white/70" : "text-muted-foreground"}>
-                    ر.س / {plan.period}
+              <div className="text-center mb-6">
+                <h3 className={`text-xl font-bold mb-2 ${plan.popular ? "text-primary-foreground" : "text-foreground"}`}>
+                  {plan.name}
+                </h3>
+                <div className="mb-3">
+                  <span className={`text-4xl font-bold font-display ${plan.popular ? "text-primary-foreground" : "text-foreground"}`}>
+                    {plan.price}
                   </span>
-                )}
+                  {plan.price !== "مخصص" && (
+                    <span className={plan.popular ? "text-primary-foreground/80" : "text-muted-foreground"}>/شهري</span>
+                  )}
+                </div>
+                <p className={`text-sm ${plan.popular ? "text-primary-foreground/80" : "text-muted-foreground"}`}>
+                  {plan.description}
+                </p>
               </div>
 
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-3 mb-6">
                 {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-3">
-                    <div className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                      plan.popular ? "bg-white/20" : "bg-green-100"
-                    }`}>
-                      <Check className={`w-3 h-3 ${plan.popular ? "text-white" : "text-green-600"}`} />
-                    </div>
-                    <span className={plan.popular ? "text-white/90" : "text-foreground"}>{feature}</span>
+                  <li key={feature} className="flex items-center gap-2">
+                    <Check className={`w-4 h-4 ${plan.popular ? "text-primary-foreground" : "text-primary"}`} />
+                    <span className={`text-sm ${plan.popular ? "text-primary-foreground/90" : "text-muted-foreground"}`}>
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>
 
-              <button
-                className={`w-full py-4 rounded-2xl font-semibold text-lg transition-all hover:scale-105 ${
+              <a
+                href="#contact"
+                className={`block text-center py-3 px-6 rounded-lg font-medium transition-all hover:scale-105 ${
                   plan.popular
-                    ? "bg-white text-purple-600 hover:bg-white/90"
-                    : "bg-accent-gradient text-white shadow-lg"
+                    ? "bg-background text-primary hover:bg-background/90"
+                    : "bg-primary text-primary-foreground hover:opacity-90"
                 }`}
               >
                 اختر الباقة
-              </button>
+              </a>
             </motion.div>
           ))}
         </div>

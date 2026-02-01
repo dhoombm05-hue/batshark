@@ -1,14 +1,14 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Phone, Mail, MessageCircle, MapPin } from "lucide-react";
+import { Phone, Mail, MessageCircle, MapPin, Clock } from "lucide-react";
 
 const ContactSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-background" ref={ref}>
+    <section className="section-padding bg-card" ref={ref}>
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -16,99 +16,86 @@ const ContactSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-accent-soft text-sm font-medium text-foreground mb-4">
-            📞 تواصل معنا
-          </span>
-          <h2 className="heading-lg mb-4">نحن هنا لمساعدتك</h2>
+          <h2 className="heading-lg text-foreground mb-4">تواصل معنا</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            فريقنا جاهز للإجابة على استفساراتك ومساعدتك في اختيار الحل الأمثل
+            نحن هنا لمساعدتك في تحقيق أهدافك الإعلانية
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
-          {/* Contact Cards - Right Side */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid gap-4"
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          {/* Phone */}
+          <motion.a
+            href="tel:0505050505"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex flex-col items-center p-6 rounded-2xl bg-background border border-border hover:border-primary/30 hover:shadow-card transition-all group"
           >
-            {/* Phone */}
-            <a
-              href="tel:+966500000000"
-              className="flex items-center gap-4 p-5 rounded-2xl bg-card border border-border hover:border-purple-300 hover:shadow-soft transition-all group"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Phone className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <p className="text-muted-foreground text-sm mb-0.5">اتصل بنا</p>
-                <p className="text-foreground text-lg font-semibold" dir="ltr">+966 50 000 0000</p>
-              </div>
-            </a>
-
-            {/* WhatsApp */}
-            <a
-              href="https://wa.me/966500000000"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 p-5 rounded-2xl bg-card border border-border hover:border-green-300 hover:shadow-soft transition-all group"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <MessageCircle className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <p className="text-muted-foreground text-sm mb-0.5">واتساب</p>
-                <p className="text-foreground text-lg font-semibold" dir="ltr">+966 50 000 0000</p>
-              </div>
-            </a>
-
-            {/* Email */}
-            <a
-              href="mailto:info@batshark.com"
-              className="flex items-center gap-4 p-5 rounded-2xl bg-card border border-border hover:border-purple-300 hover:shadow-soft transition-all group"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Mail className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <p className="text-muted-foreground text-sm mb-0.5">البريد الإلكتروني</p>
-                <p className="text-foreground text-lg font-semibold">info@batshark.com</p>
-              </div>
-            </a>
-          </motion.div>
-
-          {/* Brand Section - Left Side */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-center lg:text-right"
-          >
-            <div className="inline-block">
-              <div className="relative">
-                {/* Decorative background */}
-                <div className="absolute -inset-8 bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-blue-500/10 rounded-3xl blur-2xl" />
-                
-                <div className="relative">
-                  <span className="text-5xl md:text-7xl font-black tracking-wider text-gradient">
-                    BATSHARK
-                  </span>
-                  
-                  <p className="text-muted-foreground text-xl mt-6">
-                    نقود ثورة الإعلانات الرقمية في المملكة
-                  </p>
-
-                  {/* Location */}
-                  <div className="flex items-center gap-2 justify-center lg:justify-start mt-6 text-muted-foreground">
-                    <MapPin className="w-5 h-5" />
-                    <span>المملكة العربية السعودية</span>
-                  </div>
-                </div>
-              </div>
+            <div className="w-14 h-14 rounded-full bg-brown-light flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <Phone className="w-6 h-6 text-primary-brown" />
             </div>
+            <h4 className="font-bold text-foreground mb-1">هاتف</h4>
+            <p className="text-muted-foreground text-center" dir="ltr">0505050505</p>
+          </motion.a>
+
+          {/* WhatsApp */}
+          <motion.a
+            href="https://wa.me/966505050505"
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col items-center p-6 rounded-2xl bg-background border border-border hover:border-primary/30 hover:shadow-card transition-all group"
+          >
+            <div className="w-14 h-14 rounded-full bg-brown-light flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <MessageCircle className="w-6 h-6 text-primary-brown" />
+            </div>
+            <h4 className="font-bold text-foreground mb-1">واتساب</h4>
+            <p className="text-muted-foreground text-center" dir="ltr">0505050505</p>
+          </motion.a>
+
+          {/* Email */}
+          <motion.a
+            href="mailto:info@batshark.com"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col items-center p-6 rounded-2xl bg-background border border-border hover:border-primary/30 hover:shadow-card transition-all group"
+          >
+            <div className="w-14 h-14 rounded-full bg-brown-light flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <Mail className="w-6 h-6 text-primary-brown" />
+            </div>
+            <h4 className="font-bold text-foreground mb-1">ايميل</h4>
+            <p className="text-muted-foreground text-center">info@batshark.com</p>
+          </motion.a>
+
+          {/* Hours */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex flex-col items-center p-6 rounded-2xl bg-background border border-border"
+          >
+            <div className="w-14 h-14 rounded-full bg-brown-light flex items-center justify-center mb-4">
+              <Clock className="w-6 h-6 text-primary-brown" />
+            </div>
+            <h4 className="font-bold text-foreground mb-1">ساعات العمل</h4>
+            <p className="text-muted-foreground text-center text-sm">السبت - الخميس</p>
+            <p className="text-muted-foreground text-center text-sm">9 صباحاً - 10 مساءً</p>
           </motion.div>
         </div>
+
+        {/* Address */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="flex items-center justify-center gap-2 mt-10 text-muted-foreground"
+        >
+          <MapPin className="w-5 h-5" />
+          <span>الرياض، المملكة العربية السعودية</span>
+        </motion.div>
       </div>
     </section>
   );

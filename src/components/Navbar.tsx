@@ -26,14 +26,14 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/90 backdrop-blur-xl shadow-soft" : ""
-      }`}
+      className="fixed top-4 left-4 right-4 z-50"
     >
-      <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
+      <div className={`mx-auto max-w-5xl transition-all duration-300 ${
+        isScrolled ? "navbar-pill px-6" : "bg-transparent"
+      }`}>
+        <div className="flex items-center justify-between h-16">
           <a href="#" className="text-2xl font-black tracking-wider">
-            <span className="text-gradient">BATSHARK</span>
+            <span className={isScrolled ? "text-primary-brown" : "text-white"}>BATSHARK</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -42,14 +42,18 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+                className={`transition-colors font-medium ${
+                  isScrolled 
+                    ? "text-muted-foreground hover:text-foreground" 
+                    : "text-white/80 hover:text-white"
+                }`}
               >
                 {link.name}
               </a>
             ))}
             <a
               href="#pricing"
-              className="px-6 py-2.5 rounded-xl bg-accent-gradient text-white font-medium hover:opacity-90 transition-all hover:scale-105 shadow-lg"
+              className="px-6 py-2.5 rounded-lg bg-primary-brown text-white font-medium hover:opacity-90 transition-all hover:scale-105"
             >
               ابدأ الآن
             </a>
@@ -61,9 +65,9 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
             )}
           </button>
         </div>
@@ -73,9 +77,9 @@ const Navbar = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden py-6 border-t border-border bg-background/95 backdrop-blur-xl"
+            className="md:hidden py-6 border-t border-border bg-white rounded-b-2xl"
           >
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 px-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -88,7 +92,7 @@ const Navbar = () => {
               ))}
               <a
                 href="#pricing"
-                className="mt-4 px-6 py-3 rounded-xl bg-accent-gradient text-white font-medium text-center"
+                className="mt-4 px-6 py-3 rounded-lg bg-primary-brown text-white font-medium text-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 ابدأ الآن
