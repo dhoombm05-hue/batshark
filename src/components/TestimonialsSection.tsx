@@ -1,25 +1,19 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Quote } from "lucide-react";
+import { Monitor } from "lucide-react";
 
 const testimonials = [
   {
-    name: "أحمد خالد",
-    role: "مدير تسويق",
-    image: "https://images.unsplash.com/photo-1581803118522-7b72a50f7e9f?auto=format&fit=crop&w=150&h=150&q=80",
+    company: "مطاعم البيك",
     quote: "شراكتنا مع BATSHARK أضاءت أعمالنا وزادت من انتشارنا بشكل كبير."
   },
   {
-    name: "فاطمة الزهراء",
-    role: "صاحبة عمل",
-    image: "https://images.unsplash.com/photo-1591714098656-94a8a95dcf50?auto=format&fit=crop&w=150&h=150&q=80",
+    company: "مجموعة الفطيم",
     quote: "الحلول الإعلانية التي تقدمها BATSHARK فريدة وتصل لجمهور أوسع."
   },
   {
-    name: "يوسف علي",
-    role: "رائد أعمال",
-    image: "https://images.unsplash.com/photo-1656338997878-279d71d48f6e?auto=format&fit=crop&w=150&h=150&q=80",
+    company: "شركة المراعي",
     quote: "من خلال شاشات BATSHARK، حققنا نموًا ملحوظًا في المبيعات."
   },
 ];
@@ -29,7 +23,7 @@ const TestimonialsSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="section-padding bg-background" ref={ref}>
+    <section className="section-padding bg-muted/30" ref={ref}>
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -37,36 +31,35 @@ const TestimonialsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="heading-lg text-foreground mb-4">شركاؤنا</h2>
+          <h2 className="heading-lg text-foreground mb-4">آراء عملائنا</h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            آراء عملائنا الذين يثقون بنا
+            ماذا يقول عملاؤنا عن خدماتنا
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {testimonials.map((testimonial, index) => (
             <motion.div
-              key={testimonial.name}
+              key={testimonial.company}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="text-center"
+              className="bg-background p-8 rounded-2xl border border-border"
             >
-              <div className="relative mb-6">
-                <Quote className="absolute -top-2 -right-2 w-8 h-8 text-primary/20" />
+              <div className="mb-6">
                 <p className="text-muted-foreground text-lg leading-relaxed">
                   "{testimonial.quote}"
                 </p>
               </div>
               
-              <div className="flex flex-col items-center">
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-16 h-16 rounded-full object-cover mb-3 border-2 border-border"
-                />
-                <h4 className="font-bold text-foreground">{testimonial.name}</h4>
-                <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center">
+                  <Monitor className="w-5 h-5 text-foreground" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-foreground">{testimonial.company}</h4>
+                  <p className="text-sm text-muted-foreground">شريك معتمد</p>
+                </div>
               </div>
             </motion.div>
           ))}

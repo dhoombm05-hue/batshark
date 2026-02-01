@@ -33,7 +33,7 @@ const Navbar = () => {
       }`}>
         <div className="flex items-center justify-between h-16">
           <a href="#" className="text-2xl font-black tracking-wider">
-            <span className={isScrolled ? "text-primary-brown" : "text-white"}>BATSHARK</span>
+            <span className={isScrolled ? "text-foreground" : "text-foreground"}>BATSHARK</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -42,18 +42,14 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className={`transition-colors font-medium ${
-                  isScrolled 
-                    ? "text-muted-foreground hover:text-foreground" 
-                    : "text-white/80 hover:text-white"
-                }`}
+                className="text-muted-foreground hover:text-foreground transition-colors font-medium"
               >
                 {link.name}
               </a>
             ))}
             <a
               href="#pricing"
-              className="px-6 py-2.5 rounded-lg bg-primary-brown text-white font-medium hover:opacity-90 transition-all hover:scale-105"
+              className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all hover:scale-105"
             >
               ابدأ الآن
             </a>
@@ -65,9 +61,9 @@ const Navbar = () => {
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? (
-              <X className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
+              <X className="w-6 h-6 text-foreground" />
             ) : (
-              <Menu className={`w-6 h-6 ${isScrolled ? "text-foreground" : "text-white"}`} />
+              <Menu className="w-6 h-6 text-foreground" />
             )}
           </button>
         </div>
@@ -77,7 +73,7 @@ const Navbar = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden py-6 border-t border-border bg-white rounded-b-2xl"
+            className="md:hidden py-6 border-t border-border bg-background rounded-b-2xl"
           >
             <div className="flex flex-col gap-4 px-4">
               {navLinks.map((link) => (
@@ -92,7 +88,7 @@ const Navbar = () => {
               ))}
               <a
                 href="#pricing"
-                className="mt-4 px-6 py-3 rounded-lg bg-primary-brown text-white font-medium text-center"
+                className="mt-4 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium text-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 ابدأ الآن
