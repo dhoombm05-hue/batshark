@@ -32,8 +32,8 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          <a href="#" className="text-2xl font-bold">
-            <span className="text-gradient">AdScreen</span>
+          <a href="#" className="text-2xl font-black tracking-wider">
+            <span className="text-gradient">BATSHARK</span>
           </a>
 
           {/* Desktop Navigation */}
@@ -49,7 +49,7 @@ const Navbar = () => {
             ))}
             <a
               href="#pricing"
-              className="px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+              className="px-6 py-2 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all hover:scale-105"
             >
               ابدأ الآن
             </a>
@@ -73,7 +73,7 @@ const Navbar = () => {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden py-6 border-t border-border"
+            className="md:hidden py-6 border-t border-border bg-background/95 backdrop-blur-xl"
           >
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (

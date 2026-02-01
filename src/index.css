@@ -2,59 +2,59 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Apple-inspired Design System for AdScreen */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+/* BATSHARK - Premium Dark Design System */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
   :root {
-    /* Apple-inspired dark theme as default */
-    --background: 0 0% 0%;
+    /* Premium dark theme with cyan accent */
+    --background: 220 20% 4%;
     --foreground: 0 0% 98%;
 
-    --card: 0 0% 7%;
+    --card: 220 20% 8%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 7%;
+    --popover: 220 20% 8%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 220 20% 4%;
 
-    --secondary: 0 0% 15%;
+    --secondary: 220 20% 15%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 64%;
+    --muted: 220 15% 20%;
+    --muted-foreground: 220 10% 55%;
 
-    --accent: 210 100% 50%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 180 100% 50%;
+    --accent-foreground: 220 20% 4%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 210 100% 50%;
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 180 100% 50%;
 
     --radius: 0.75rem;
 
-    /* Custom AdScreen tokens */
-    --gradient-hero: linear-gradient(180deg, hsl(0 0% 0%) 0%, hsl(0 0% 8%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 10%) 0%, hsl(0 0% 5%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(210 100% 50%) 0%, hsl(260 100% 60%) 100%);
-    --gradient-glow: radial-gradient(ellipse at center, hsl(210 100% 50% / 0.15) 0%, transparent 70%);
+    /* BATSHARK custom tokens */
+    --gradient-hero: linear-gradient(180deg, hsl(220 20% 4%) 0%, hsl(220 20% 8%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(220 20% 10%) 0%, hsl(220 20% 6%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(180 100% 50%) 0%, hsl(200 100% 60%) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, hsl(180 100% 50% / 0.15) 0%, transparent 70%);
     
-    --shadow-glow: 0 0 60px hsl(210 100% 50% / 0.3);
-    --shadow-card: 0 25px 50px -12px hsl(0 0% 0% / 0.5);
+    --shadow-glow: 0 0 80px hsl(180 100% 50% / 0.3);
+    --shadow-card: 0 25px 50px -12px hsl(220 20% 0% / 0.5);
     
-    --sidebar-background: 0 0% 5%;
+    --sidebar-background: 220 20% 5%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 210 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 0 0% 15%;
+    --sidebar-primary: 180 100% 50%;
+    --sidebar-primary-foreground: 220 20% 4%;
+    --sidebar-accent: 220 20% 15%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 210 100% 50%;
+    --sidebar-border: 220 15% 18%;
+    --sidebar-ring: 180 100% 50%;
   }
 }
 
@@ -106,6 +106,24 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Infinite scroll animation for partners */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .animate-scroll {
+    animation: scroll 20s linear infinite;
+  }
+  
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
 }
 
 @layer utilities {
@@ -136,6 +154,21 @@
     to {
       opacity: 1;
       transform: scale(1);
+    }
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 4s ease-in-out infinite;
+  }
+
+  @keyframes pulseGlow {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.1);
     }
   }
 }
