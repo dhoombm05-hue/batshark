@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import ScreenAdvertising from "./pages/ScreenAdvertising";
-import Advertisers from "./pages/Advertisers";
 import Packages from "./pages/Packages";
 import Projects from "./pages/Projects";
 import AboutUs from "./pages/AboutUs";
@@ -25,8 +24,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/screen-advertising" element={<ScreenAdvertising />} />
-            <Route path="/advertisers" element={<Advertisers />} />
-            <Route path="/packages" element={<Packages />} />
+            <Route path="/padel-courts" element={<Packages />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />

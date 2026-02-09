@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Monitor, Trophy } from "lucide-react";
+import { ArrowLeft, Building2, Trophy } from "lucide-react";
+import umbrixLogo from "@/assets/umbrix-logo.jpg";
 
 const Projects = () => {
   return (
@@ -32,7 +33,7 @@ const Projects = () => {
               <div className="grid lg:grid-cols-2">
                 <div className="p-10 lg:p-14 flex flex-col justify-center">
                   <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted text-sm font-medium text-foreground mb-4 w-fit">
-                    <Monitor className="w-4 h-4" />
+                    <Building2 className="w-4 h-4" />
                     مشروع مستقل
                   </div>
                   <h2 className="heading-md text-foreground mb-4">Umbrix</h2>
@@ -46,7 +47,7 @@ const Projects = () => {
                 </div>
                 <div className="bg-muted flex items-center justify-center p-14">
                   <div className="text-center">
-                    <h3 className="text-6xl font-black text-foreground mb-2">UMBRIX</h3>
+                    <img src={umbrixLogo} alt="Umbrix" className="h-40 w-auto mx-auto mb-4 rounded-2xl" />
                     <p className="text-muted-foreground">قريباً المزيد من التفاصيل</p>
                   </div>
                 </div>
@@ -68,7 +69,7 @@ const Projects = () => {
                   <div className="text-center">
                     <Trophy className="w-16 h-16 mx-auto mb-4 text-primary-foreground/80" />
                     <h3 className="text-4xl font-black mb-2">Padel Courts</h3>
-                    <p className="text-primary-foreground/70">Portico & Chinese</p>
+                    <p className="text-primary-foreground/70">Spanish & Chinese</p>
                   </div>
                 </div>
                 <div className="p-10 lg:p-14 flex flex-col justify-center order-1 lg:order-2">
@@ -76,26 +77,30 @@ const Projects = () => {
                     <Trophy className="w-4 h-4" />
                     ملاعب بادل
                   </div>
-                  <h2 className="heading-md mb-4">Portico & Chinese Padel Courts</h2>
+                  <h2 className="heading-md mb-4">ملاعب البادل</h2>
                   <p className="text-primary-foreground/80 leading-relaxed mb-6">
-                    مشاريع ملاعب البادل التابعة لشركة BATSHARK. نقدم تجربة رياضية مميزة
-                    بأعلى المعايير العالمية في مواقع استراتيجية.
+                    نوفر أجود ملاعب البادل بمواصفات عالمية من مصادر إسبانية وصينية
+                    بأسعار شاملة جميع التكاليف.
                   </p>
 
                   <div className="grid grid-cols-2 gap-4 mb-6">
                     <div className="bg-primary-foreground/10 rounded-xl p-4 text-center">
-                      <h4 className="font-bold text-lg">Portico</h4>
-                      <p className="text-primary-foreground/70 text-sm mt-1">ملعب بادل</p>
+                      <h4 className="font-bold text-lg">🇪🇸 إسبانية</h4>
+                      <p className="text-primary-foreground/70 text-sm mt-1">3 فئات</p>
                     </div>
                     <div className="bg-primary-foreground/10 rounded-xl p-4 text-center">
-                      <h4 className="font-bold text-lg">Chinese</h4>
-                      <p className="text-primary-foreground/70 text-sm mt-1">ملعب بادل</p>
+                      <h4 className="font-bold text-lg">🇨🇳 صينية</h4>
+                      <p className="text-primary-foreground/70 text-sm mt-1">2 فئات</p>
                     </div>
                   </div>
 
-                  <div className="w-full h-40 rounded-xl bg-primary-foreground/10 flex items-center justify-center">
-                    <span className="text-primary-foreground/60 text-sm">صور ومحتوى المشروع قريباً</span>
-                  </div>
+                  <Link
+                    to="/padel-courts"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-primary-foreground text-primary font-bold hover:opacity-90 transition-all hover:scale-105 w-fit"
+                  >
+                    تصفح الملاعب
+                    <ArrowLeft className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
             </div>
