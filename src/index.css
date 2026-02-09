@@ -40,6 +40,19 @@
     --shadow-card: 0 4px 25px hsl(0 0% 0% / 0.06);
     --shadow-elevated: 0 15px 50px hsl(0 0% 0% / 0.1);
 
+    /* Section-specific colors */
+    --padel: 162 63% 41%;
+    --padel-foreground: 0 0% 100%;
+    --padel-muted: 162 40% 95%;
+
+    --umbrix: 38 92% 50%;
+    --umbrix-foreground: 0 0% 100%;
+    --umbrix-muted: 38 60% 95%;
+
+    --digital: 217 91% 60%;
+    --digital-foreground: 0 0% 100%;
+    --digital-muted: 217 60% 96%;
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 0 0% 8%;
     --sidebar-primary: 0 0% 8%;
@@ -130,6 +143,15 @@
   @keyframes pageIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes countUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-count-up {
+    animation: countUp 0.8s ease-out forwards;
   }
 }
 

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -74,22 +74,21 @@ const ScreenAdvertising = () => {
 
   return (
     <>
-      {/* Hero - Digital LED Style */}
+      {/* Hero */}
       <section className="relative pt-28 pb-24 px-6 overflow-hidden bg-foreground text-primary-foreground">
-        {/* Animated grid background */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: "linear-gradient(hsl(var(--primary-foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary-foreground)) 1px, transparent 1px)",
           backgroundSize: "60px 60px"
         }} />
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 rounded-full blur-[120px] opacity-10"
-          style={{ background: "hsl(var(--primary-foreground))" }}
+          className="absolute top-20 left-10 w-72 h-72 rounded-full blur-[120px]"
+          style={{ background: "hsl(var(--digital) / 0.15)" }}
           animate={{ scale: [1, 1.3, 1], opacity: [0.08, 0.15, 0.08] }}
           transition={{ repeat: Infinity, duration: 6 }}
         />
         <motion.div
-          className="absolute bottom-10 right-10 w-96 h-96 rounded-full blur-[150px] opacity-10"
-          style={{ background: "hsl(var(--primary-foreground))" }}
+          className="absolute bottom-10 right-10 w-96 h-96 rounded-full blur-[150px]"
+          style={{ background: "hsl(var(--digital) / 0.1)" }}
           animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.05, 0.1] }}
           transition={{ repeat: Infinity, duration: 8 }}
         />
@@ -105,16 +104,15 @@ const ScreenAdvertising = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary-foreground/20 text-sm font-medium mb-8"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-digital/40 text-digital text-sm font-bold mb-8"
               >
                 <Monitor className="w-4 h-4" />
                 <span>Screen Advertising</span>
-                <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
               </motion.div>
 
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight leading-tight mb-6">
                 أعلن على
-                <span className="block bg-gradient-to-l from-primary-foreground/60 to-primary-foreground bg-clip-text">
+                <span className="block bg-gradient-to-l from-digital to-primary-foreground bg-clip-text text-transparent">
                   أكبر شبكة شاشات
                 </span>
               </h1>
@@ -127,7 +125,7 @@ const ScreenAdvertising = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => setShowForm(true)}
-                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary-foreground text-foreground font-bold text-lg hover:scale-105 transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-digital text-digital-foreground font-bold text-lg hover:scale-105 transition-all"
                 >
                   اطلب إعلانك الآن
                   <ChevronLeft className="w-5 h-5" />
@@ -149,29 +147,18 @@ const ScreenAdvertising = () => {
             >
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-3">
-                  <motion.div
-                    whileHover={{ scale: 1.03 }}
-                    className="rounded-2xl overflow-hidden border border-primary-foreground/10 shadow-2xl"
-                  >
+                  <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl overflow-hidden border border-primary-foreground/10 shadow-2xl">
                     <img src={screenMall} alt="شاشات المولات" className="w-full h-52 object-cover" />
                   </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.03 }}
-                    className="rounded-2xl overflow-hidden border border-primary-foreground/10"
-                  >
+                  <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl overflow-hidden border border-primary-foreground/10">
                     <img src={screenCorporate} alt="شاشات الشركات" className="w-full h-36 object-cover" />
                   </motion.div>
                 </div>
                 <div className="space-y-3 pt-10">
-                  <motion.div
-                    whileHover={{ scale: 1.03 }}
-                    className="rounded-2xl overflow-hidden border border-primary-foreground/10"
-                  >
+                  <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl overflow-hidden border border-primary-foreground/10">
                     <img src={screenOutdoor} alt="شاشات خارجية" className="w-full h-36 object-cover" />
                   </motion.div>
-                  <motion.div
-                    className="rounded-2xl border border-primary-foreground/10 p-6 flex flex-col items-center justify-center h-52 bg-primary-foreground/5 backdrop-blur-sm"
-                  >
+                  <motion.div className="rounded-2xl border border-digital/20 p-6 flex flex-col items-center justify-center h-52 bg-digital/10 backdrop-blur-sm">
                     <motion.span
                       className="text-5xl font-black"
                       initial={{ opacity: 0, scale: 0.5 }}
@@ -200,8 +187,8 @@ const ScreenAdvertising = () => {
           >
             <h2 className="heading-lg text-foreground mb-4">ما هي الشاشات الإعلانية الرقمية؟</h2>
             <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
-              الشاشات الإعلانية الرقمية هي الوسيلة الأقوى والأكثر تأثيراً في عالم الإعلان الحديث.
-              تعرض محتواك بجودة فائقة في مواقع استراتيجية تضمن وصوله لملايين المشاهدين يومياً.
+              الوسيلة الأقوى والأكثر تأثيراً في عالم الإعلان الحديث.
+              تعرض محتواك بجودة فائقة أمام ملايين المشاهدين يومياً.
             </p>
           </motion.div>
 
@@ -220,9 +207,9 @@ const ScreenAdvertising = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
-                className="group p-7 rounded-2xl bg-card border border-border hover:border-foreground/20 hover:shadow-card transition-all"
+                className="group p-7 rounded-2xl bg-card border border-border hover:border-digital/30 hover:shadow-card transition-all"
               >
-                <div className="w-12 h-12 rounded-xl bg-foreground text-primary-foreground flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-xl bg-digital/10 text-digital flex items-center justify-center mb-4 group-hover:bg-digital group-hover:text-digital-foreground transition-all duration-300">
                   <feature.icon className="w-6 h-6" />
                 </div>
                 <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
@@ -244,7 +231,7 @@ const ScreenAdvertising = () => {
           >
             <h2 className="heading-lg text-foreground mb-4">أماكن تواجد الشاشات</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              شاشاتنا موزّعة في أكثر المواقع حيوية وازدحاماً لضمان أقصى تأثير
+              شاشاتنا موزّعة في أكثر المواقع حيوية وازدحاماً
             </p>
           </motion.div>
 
@@ -256,15 +243,15 @@ const ScreenAdvertising = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="flex gap-5 p-7 rounded-2xl bg-background border border-border hover:shadow-card transition-all group"
+                className="flex gap-5 p-7 rounded-2xl bg-background border border-border hover:border-digital/30 hover:shadow-card transition-all group"
               >
-                <div className="w-16 h-16 rounded-2xl bg-foreground text-primary-foreground flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <div className="w-16 h-16 rounded-2xl bg-digital/10 text-digital flex items-center justify-center flex-shrink-0 group-hover:bg-digital group-hover:text-digital-foreground transition-all duration-300">
                   <loc.icon className="w-7 h-7" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="text-lg font-bold">{loc.title}</h3>
-                    <span className="text-sm font-bold bg-muted px-3 py-1 rounded-full">{loc.count}</span>
+                    <span className="text-sm font-bold bg-digital/10 text-digital px-3 py-1 rounded-full">{loc.count}</span>
                   </div>
                   <p className="text-muted-foreground text-sm leading-relaxed">{loc.description}</p>
                 </div>
@@ -274,7 +261,7 @@ const ScreenAdvertising = () => {
         </div>
       </section>
 
-      {/* Ad Management / Infographics */}
+      {/* Ad Management */}
       <section className="section-padding bg-foreground text-primary-foreground">
         <div className="container mx-auto">
           <motion.div
@@ -297,9 +284,9 @@ const ScreenAdvertising = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center p-6 rounded-2xl border border-primary-foreground/10 bg-primary-foreground/5 backdrop-blur-sm"
+                className="text-center p-6 rounded-2xl border border-primary-foreground/10 bg-digital/5"
               >
-                <item.icon className="w-8 h-8 mx-auto mb-3 text-primary-foreground/70" />
+                <item.icon className="w-8 h-8 mx-auto mb-3 text-digital" />
                 <motion.div
                   className="text-4xl md:text-5xl font-black mb-1"
                   initial={{ opacity: 0, scale: 0.5 }}
@@ -320,10 +307,10 @@ const ScreenAdvertising = () => {
             <h3 className="text-2xl font-bold text-center mb-10">آلية تشغيل الإعلان</h3>
             <div className="grid md:grid-cols-4 gap-4">
               {[
-                { step: "01", title: "اختر موقعك", desc: "حدد الشاشات والمواقع التي تريد الإعلان فيها" },
-                { step: "02", title: "أرسل المحتوى", desc: "أرسل تصميمك أو نصممه لك باحترافية" },
-                { step: "03", title: "نعرض إعلانك", desc: "يتم بث إعلانك على الشاشات المختارة فوراً" },
-                { step: "04", title: "تابع الأداء", desc: "احصل على تقارير مفصلة عن أداء حملتك" },
+                { step: "01", title: "اختر موقعك", desc: "حدد الشاشات والمواقع" },
+                { step: "02", title: "أرسل المحتوى", desc: "أرسل تصميمك أو نصممه لك" },
+                { step: "03", title: "نعرض إعلانك", desc: "بث فوري على الشاشات" },
+                { step: "04", title: "تابع الأداء", desc: "تقارير مفصلة عن حملتك" },
               ].map((item, index) => (
                 <motion.div
                   key={item.step}
@@ -333,7 +320,7 @@ const ScreenAdvertising = () => {
                   transition={{ delay: index * 0.12 }}
                   className="text-center p-5 rounded-2xl border border-primary-foreground/10"
                 >
-                  <div className="w-14 h-14 rounded-full border-2 border-primary-foreground/30 flex items-center justify-center text-xl font-black mx-auto mb-3">
+                  <div className="w-14 h-14 rounded-full border-2 border-digital/40 text-digital flex items-center justify-center text-xl font-black mx-auto mb-3">
                     {item.step}
                   </div>
                   <h4 className="font-bold mb-1">{item.title}</h4>
@@ -356,7 +343,7 @@ const ScreenAdvertising = () => {
           >
             <h2 className="heading-lg text-foreground mb-4">المعلنين الحاليين</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              الإعلانات المعروضة حالياً على شبكة شاشاتنا
+              إعلانات نشطة على شبكة شاشاتنا
             </p>
           </motion.div>
 
@@ -376,12 +363,8 @@ const ScreenAdvertising = () => {
                 <h3 className="font-bold text-lg mb-1">{ad.name}</h3>
                 <p className="text-muted-foreground text-sm mb-3">{ad.adName}</p>
                 {ad.link !== "#" && (
-                  <a
-                    href={ad.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:gap-2 transition-all"
-                  >
+                  <a href={ad.link} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:gap-2 transition-all">
                     زيارة الموقع <ExternalLink className="w-3 h-3" />
                   </a>
                 )}
@@ -401,11 +384,11 @@ const ScreenAdvertising = () => {
           >
             <h2 className="heading-lg text-foreground mb-6">جاهز لإطلاق إعلانك؟</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
-              انضم لأكثر من 1000 علامة تجارية تثق في شبكة شاشاتنا الإعلانية
+              انضم لأكثر من 1000 علامة تجارية تثق في شبكة شاشاتنا
             </p>
             <button
               onClick={() => setShowForm(true)}
-              className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-all hover:scale-105"
+              className="inline-flex items-center justify-center gap-2 px-10 py-5 rounded-full bg-digital text-digital-foreground font-bold text-lg hover:opacity-90 transition-all hover:scale-105"
             >
               اطلب إعلانك الآن
               <ChevronLeft className="w-5 h-5" />
@@ -415,106 +398,82 @@ const ScreenAdvertising = () => {
       </section>
 
       {/* Ad Request Form Modal */}
-      {showForm && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/60 backdrop-blur-sm"
-          onClick={(e) => e.target === e.currentTarget && setShowForm(false)}
-        >
+      <AnimatePresence>
+        {showForm && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="bg-background rounded-3xl p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-elevated"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/60 backdrop-blur-sm"
+            onClick={(e) => e.target === e.currentTarget && setShowForm(false)}
           >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="heading-md text-foreground">اطلب إعلانك</h3>
-              <button
-                onClick={() => setShowForm(false)}
-                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors"
-              >
-                ✕
-              </button>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium mb-2">اسم المعلن *</label>
-                <input
-                  type="text"
-                  value={form.advertiser_name}
-                  onChange={(e) => setForm({ ...form, advertiser_name: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-foreground focus:outline-none transition-colors"
-                  placeholder="اسم الشركة أو المعلن"
-                  maxLength={100}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">اسم الإعلان *</label>
-                <input
-                  type="text"
-                  value={form.ad_name}
-                  onChange={(e) => setForm({ ...form, ad_name: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-foreground focus:outline-none transition-colors"
-                  placeholder="عنوان أو اسم الإعلان"
-                  maxLength={200}
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">رابط المتجر / الموقع</label>
-                <input
-                  type="url"
-                  value={form.store_link}
-                  onChange={(e) => setForm({ ...form, store_link: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-foreground focus:outline-none transition-colors"
-                  placeholder="https://example.com"
-                  maxLength={500}
-                  dir="ltr"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">مدة الإعلان المطلوبة</label>
-                <select
-                  value={form.duration}
-                  onChange={(e) => setForm({ ...form, duration: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-foreground focus:outline-none transition-colors"
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-background rounded-3xl p-8 max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-elevated"
+            >
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="heading-md text-foreground">اطلب إعلانك</h3>
+                <button
+                  onClick={() => setShowForm(false)}
+                  className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors"
                 >
-                  <option value="">اختر المدة</option>
-                  <option value="أسبوع">أسبوع</option>
-                  <option value="شهر">شهر</option>
-                  <option value="3 أشهر">3 أشهر</option>
-                  <option value="6 أشهر">6 أشهر</option>
-                  <option value="سنة">سنة</option>
-                </select>
+                  ✕
+                </button>
               </div>
-              <div>
-                <label className="block text-sm font-medium mb-2">ملاحظات إضافية</label>
-                <textarea
-                  value={form.notes}
-                  onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-foreground focus:outline-none transition-colors min-h-[100px] resize-none"
-                  placeholder="أي ملاحظات أو متطلبات خاصة..."
-                  maxLength={1000}
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full py-4 rounded-full bg-primary text-primary-foreground font-semibold text-lg hover:opacity-90 transition-all hover:scale-[1.02] disabled:opacity-50 flex items-center justify-center gap-2"
-              >
-                {loading ? "جاري الإرسال..." : (
-                  <>
-                    إرسال الطلب
-                    <Send className="w-5 h-5" />
-                  </>
-                )}
-              </button>
-            </form>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">اسم المعلن *</label>
+                  <input type="text" value={form.advertiser_name}
+                    onChange={(e) => setForm({ ...form, advertiser_name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-digital focus:outline-none transition-colors"
+                    placeholder="اسم الشركة أو المعلن" maxLength={100} required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">اسم الإعلان *</label>
+                  <input type="text" value={form.ad_name}
+                    onChange={(e) => setForm({ ...form, ad_name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-digital focus:outline-none transition-colors"
+                    placeholder="عنوان أو اسم الإعلان" maxLength={200} required />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">رابط المتجر / الموقع</label>
+                  <input type="url" value={form.store_link}
+                    onChange={(e) => setForm({ ...form, store_link: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-digital focus:outline-none transition-colors"
+                    placeholder="https://example.com" maxLength={500} dir="ltr" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">مدة الإعلان المطلوبة</label>
+                  <select value={form.duration}
+                    onChange={(e) => setForm({ ...form, duration: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-digital focus:outline-none transition-colors">
+                    <option value="">اختر المدة</option>
+                    <option value="أسبوع">أسبوع</option>
+                    <option value="شهر">شهر</option>
+                    <option value="3 أشهر">3 أشهر</option>
+                    <option value="6 أشهر">6 أشهر</option>
+                    <option value="سنة">سنة</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">ملاحظات إضافية</label>
+                  <textarea value={form.notes}
+                    onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl bg-card border border-border focus:border-digital focus:outline-none transition-colors min-h-[100px] resize-none"
+                    placeholder="أي ملاحظات أو متطلبات خاصة..." maxLength={1000} />
+                </div>
+                <button type="submit" disabled={loading}
+                  className="w-full py-4 rounded-full bg-digital text-digital-foreground font-semibold text-lg hover:opacity-90 transition-all hover:scale-[1.02] disabled:opacity-50 flex items-center justify-center gap-2">
+                  {loading ? "جاري الإرسال..." : (<>إرسال الطلب <Send className="w-5 h-5" /></>)}
+                </button>
+              </form>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      )}
+        )}
+      </AnimatePresence>
     </>
   );
 };
