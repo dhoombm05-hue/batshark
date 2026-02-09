@@ -1,25 +1,33 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const navLinks = [
-  { name: "الرئيسية", href: "#" },
-  { name: "من نحن", href: "#about" },
-  { name: "الأسعار", href: "#pricing" },
-  { name: "تواصل معنا", href: "#contact" },
+  { name: "الرئيسية", href: "/" },
+  { name: "الشاشات الإعلانية", href: "/screen-advertising" },
+  { name: "المشاريع", href: "/projects" },
+  { name: "الباقات", href: "/packages" },
+  { name: "من نحن", href: "/about" },
+  { name: "تواصل معنا", href: "/contact" },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <motion.nav
@@ -28,74 +36,76 @@ const Navbar = () => {
       transition={{ duration: 0.6 }}
       className="fixed top-4 left-4 right-4 z-50"
     >
-      <div className={`mx-auto max-w-5xl transition-all duration-300 ${
+      <div className={`mx-auto max-w-6xl transition-all duration-300 ${
         isScrolled ? "navbar-pill px-6" : "bg-transparent"
       }`}>
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="text-2xl font-black tracking-wider">
-            <span className={isScrolled ? "text-foreground" : "text-foreground"}>BATSHARK</span>
-          </a>
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logo} alt="BATSHARK" className="h-10 w-auto" />
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors font-medium"
+                to={link.href}
+                className={`text-sm font-medium transition-colors ${
+                  location.pathname === link.href
+                    ? "text-foreground"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
-            <a
-              href="#pricing"
-              className="px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-all hover:scale-105"
+            <Link
+              to="/contact"
+              className="px-5 py-2 rounded-full bg-primary text-primary-foreground text-sm font-medium hover:opacity-90 transition-all hover:scale-105"
             >
-              ابدأ الآن
-            </a>
+              اطلب خدمة
+            </Link>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="lg:hidden p-2"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-foreground" />
-            ) : (
-              <Menu className="w-6 h-6 text-foreground" />
-            )}
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:hidden py-6 border-t border-border bg-background rounded-b-2xl"
-          >
-            <div className="flex flex-col gap-4 px-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors py-2 font-medium"
-                  onClick={() => setIsMobileMenuOpen(false)}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden overflow-hidden"
+            >
+              <div className="py-6 border-t border-border bg-background rounded-b-2xl px-4 flex flex-col gap-3">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className={`py-2 font-medium transition-colors ${
+                      location.pathname === link.href
+                        ? "text-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                <Link
+                  to="/contact"
+                  className="mt-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium text-center"
                 >
-                  {link.name}
-                </a>
-              ))}
-              <a
-                href="#pricing"
-                className="mt-4 px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium text-center"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                ابدأ الآن
-              </a>
-            </div>
-          </motion.div>
-        )}
+                  اطلب خدمة
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </motion.nav>
   );
