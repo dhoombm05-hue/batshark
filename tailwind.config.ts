@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['Tajawal', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -49,6 +49,21 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        padel: {
+          DEFAULT: "hsl(var(--padel))",
+          foreground: "hsl(var(--padel-foreground))",
+          muted: "hsl(var(--padel-muted))",
+        },
+        umbrix: {
+          DEFAULT: "hsl(var(--umbrix))",
+          foreground: "hsl(var(--umbrix-foreground))",
+          muted: "hsl(var(--umbrix-muted))",
+        },
+        digital: {
+          DEFAULT: "hsl(var(--digital))",
+          foreground: "hsl(var(--digital-foreground))",
+          muted: "hsl(var(--digital-muted))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",

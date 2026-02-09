@@ -6,8 +6,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import ScreenAdvertising from "./pages/ScreenAdvertising";
-import Packages from "./pages/Packages";
-import Projects from "./pages/Projects";
+import PadelCourts from "./pages/PadelCourts";
+import Umbrix from "./pages/Umbrix";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";
@@ -24,8 +24,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/screen-advertising" element={<ScreenAdvertising />} />
-            <Route path="/padel-courts" element={<Packages />} />
-            <Route path="/projects" element={<Projects />} />
+            <Route path="/padel-courts" element={<PadelCourts />} />
+            <Route path="/umbrix" element={<Umbrix />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="*" element={<NotFound />} />

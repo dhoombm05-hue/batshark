@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Eye, Target, Heart, ArrowLeft, Monitor, Building2, Trophy } from "lucide-react";
+import { Eye, Target, Heart, ArrowLeft, Monitor, Sparkles, Trophy } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const AboutUs = () => {
@@ -80,7 +80,7 @@ const AboutUs = () => {
         </div>
       </section>
 
-      {/* Our Projects */}
+      {/* Our Divisions */}
       <section className="section-padding bg-background">
         <div className="container mx-auto">
           <motion.div
@@ -89,14 +89,14 @@ const AboutUs = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="heading-lg text-foreground mb-4">مشاريعنا تحت مظلة BATSHARK</h2>
+            <h2 className="heading-lg text-foreground mb-4">أقسامنا تحت مظلة BATSHARK</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             {[
-              { icon: Monitor, title: "الشاشات الإعلانية", desc: "خدمتنا الرئيسية في الإعلانات الرقمية" },
-              { icon: Building2, title: "Umbrix", desc: "مشروع مستقل تابع للشركة" },
-              { icon: Trophy, title: "Padel Courts", desc: "ملاعب بادل Portico & Chinese" },
+              { icon: Monitor, title: "الشاشات الإعلانية", desc: "خدمتنا الرئيسية في الإعلانات الرقمية", link: "/screen-advertising", color: "digital" },
+              { icon: Trophy, title: "ملاعب البادل", desc: "ملاعب إسبانية وصينية بمواصفات عالمية", link: "/padel-courts", color: "padel" },
+              { icon: Sparkles, title: "Umbrix", desc: "علامة تجارية فاخرة ومبتكرة", link: "/umbrix", color: "umbrix" },
             ].map((item, index) => (
               <motion.div
                 key={item.title}
@@ -104,13 +104,17 @@ const AboutUs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="p-6 rounded-2xl bg-card border border-border text-center hover:shadow-card transition-all"
               >
-                <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center mx-auto mb-4">
-                  <item.icon className="w-6 h-6" />
-                </div>
-                <h3 className="font-bold text-lg mb-1">{item.title}</h3>
-                <p className="text-muted-foreground text-sm">{item.desc}</p>
+                <Link
+                  to={item.link}
+                  className={`block p-6 rounded-2xl bg-card border border-border text-center hover:border-${item.color}/30 hover:shadow-card transition-all group`}
+                >
+                  <div className={`w-12 h-12 rounded-xl bg-${item.color}/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-${item.color} group-hover:text-${item.color}-foreground transition-all duration-300`}>
+                    <item.icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm">{item.desc}</p>
+                </Link>
               </motion.div>
             ))}
           </div>

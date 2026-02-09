@@ -8,7 +8,7 @@ const navLinks = [
   { name: "الرئيسية", href: "/" },
   { name: "الشاشات الإعلانية", href: "/screen-advertising" },
   { name: "ملاعب البادل", href: "/padel-courts" },
-  { name: "المشاريع", href: "/projects" },
+  { name: "Umbrix", href: "/umbrix" },
   { name: "من نحن", href: "/about" },
   { name: "تواصل معنا", href: "/contact" },
 ];
