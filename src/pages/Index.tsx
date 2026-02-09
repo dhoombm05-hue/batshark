@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Monitor, ArrowLeft, Building2, Briefcase } from "lucide-react";
+import { Monitor, ArrowLeft, Trophy, Briefcase } from "lucide-react";
 import logo from "@/assets/logo.png";
 import PartnersSection from "@/components/PartnersSection";
 import StatsSection from "@/components/StatsSection";
@@ -103,16 +103,16 @@ const Index = () => {
                 link: "/screen-advertising",
               },
               {
-                icon: Building2,
-                title: "إدارة المشاريع",
-                description: "إدارة وتطوير مشاريع تجارية متنوعة بأعلى معايير الجودة",
-                link: "/projects",
+                icon: Trophy,
+                title: "ملاعب البادل",
+                description: "ملاعب بادل إسبانية وصينية بمواصفات عالمية وأسعار شاملة",
+                link: "/padel-courts",
               },
               {
                 icon: Briefcase,
-                title: "حلول الأعمال",
-                description: "باقات مرنة وحلول مخصصة لتناسب جميع احتياجات العملاء",
-                link: "/packages",
+                title: "إدارة المشاريع",
+                description: "إدارة وتطوير مشاريع تجارية متنوعة بأعلى معايير الجودة",
+                link: "/projects",
               },
             ].map((service, index) => (
               <motion.div
