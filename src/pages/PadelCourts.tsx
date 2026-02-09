@@ -17,7 +17,6 @@ interface Court {
     glass: string;
     frame: string;
     turf: string;
-    net: string;
     warranty: string;
   };
   features: string[];
@@ -29,41 +28,39 @@ const courtsData: Record<string, Court[]> = {
       id: "ace",
       name: "Ace Court",
       tag: "الفئة الاقتصادية",
-      price: 120500,
+      price: 114500,
       usage: "تجاري / ترفيهي",
       specs: {
         dimensions: "20m × 10m",
-        glass: "زجاج مقوّى 12mm",
-        frame: "هيكل فولاذي مجلفن",
-        turf: "عشب صناعي إسباني",
-        net: "نظام شبكة احترافي",
-        warranty: "ضمان سنتين شامل",
+        glass: "زجاج مقسّى 10mm — عزل صوتي 33dB",
+        frame: "فولاذ مجلفن S275 JR مع أعمدة 80×80mm",
+        turf: "عشب صناعي 12mm — MONDO / JUTAgrass",
+        warranty: "10 سنوات هيكل — 7 سنوات طلاء",
       },
       features: [
-        "جودة احترافية بسعر مناسب",
+        "تصميم محسّن للشحن — 6 ملاعب في حاوية واحدة",
         "مناسب للمشاريع الناشئة والأندية",
-        "تصميم متين ومقاوم للعوامل الجوية",
-        "سهولة الصيانة والتشغيل",
+        "إضاءة LED — 150W أو 320W للمنافسات",
+        "طلاء حراري مقاوم بألوان متعددة",
       ],
     },
     {
       id: "standard",
       name: "Standard Court",
       tag: "الأكثر طلباً",
-      price: 130000,
+      price: 124000,
       usage: "تجاري / احترافي",
       specs: {
         dimensions: "20m × 10m",
-        glass: "زجاج مقوّى 12mm عالي الشفافية",
-        frame: "هيكل فولاذي مجلفن مقاوم للصدأ",
-        turf: "عشب صناعي إسباني فاخر",
-        net: "نظام شبكة احترافي معتمد",
-        warranty: "ضمان 3 سنوات شامل",
+        glass: "زجاج مقسّى 12mm عالي الشفافية — 34dB",
+        frame: "فولاذ مجلفن S275 JR مقاوم للتآكل",
+        turf: "عشب صناعي إسباني فاخر 12mm",
+        warranty: "10 سنوات هيكل — 7 سنوات طلاء",
       },
       features: [
         "جودة أعلى ومواصفات محسّنة",
         "مناسب للاستخدام التجاري المكثف",
-        "مواد عالية الجودة ومتانة استثنائية",
+        "إضاءة LED احترافية متعددة القوة",
         "أفضل خيار للمشاريع المتوسطة والكبيرة",
       ],
     },
@@ -71,21 +68,20 @@ const courtsData: Record<string, Court[]> = {
       id: "panoramic",
       name: "Panoramic Court",
       tag: "الفئة الاحترافية",
-      price: 133500,
+      price: 127500,
       usage: "بطولات / احترافي",
       specs: {
         dimensions: "20m × 10m",
-        glass: "زجاج بانورامي مقوّى 12mm",
-        frame: "هيكل فولاذي مجلفن بتصميم بانورامي",
-        turf: "عشب صناعي إسباني للبطولات",
-        net: "نظام شبكة بطولات دولية",
-        warranty: "ضمان 3 سنوات شامل",
+        glass: "زجاج بانورامي مقسّى 12mm — 34dB",
+        frame: "فولاذ مجلفن S275 JR بتصميم بانورامي مدعّم",
+        turf: "عشب صناعي للبطولات 12mm — ماركات عالمية",
+        warranty: "10 سنوات هيكل — 7 سنوات طلاء",
       },
       features: [
         "تصميم بانورامي زجاجي بالكامل",
         "معتمد للبطولات والمسابقات الدولية",
         "رؤية واضحة من جميع الزوايا للجمهور",
-        "أعلى معايير الجودة العالمية",
+        "3 ملاعب فقط في الحاوية — جودة تصنيع فاخرة",
       ],
     },
   ],
@@ -94,35 +90,33 @@ const courtsData: Record<string, Court[]> = {
       id: "cn-panoramic",
       name: "Panoramic Court",
       tag: "تصميم بانورامي",
-      price: 70500,
+      price: 64500,
       usage: "تجاري / احترافي",
       specs: {
         dimensions: "20m × 10m",
         glass: "زجاج مقوّى عالي الجودة",
-        frame: "هيكل فولاذي مجلفن",
-        turf: "عشب صناعي عالي الكثافة",
-        net: "نظام شبكة احترافي",
+        frame: "فولاذ مجلفن بالغمس الساخن Q235",
+        turf: "عشب صناعي عالي الكثافة 8000D-13500D",
         warranty: "ضمان سنتين شامل",
       },
       features: [
         "تصميم بانورامي بجودة عالية",
         "أداء ممتاز وسعر منافس",
-        "مناسب للمشاريع التجارية",
-        "صيانة سهلة ومتانة عالية",
+        "إطارات شبك فولاذية قوية",
+        "مناسب للأندية والمشاريع التجارية",
       ],
     },
     {
       id: "cn-super-panoramic",
       name: "Super Panoramic Court",
       tag: "أعلى فئة",
-      price: 68500,
+      price: 62500,
       usage: "تجاري / بطولات",
       specs: {
         dimensions: "20m × 10m",
         glass: "زجاج بانورامي متطور",
-        frame: "هيكل فولاذي مجلفن متقدم",
-        turf: "عشب صناعي عالي الأداء",
-        net: "نظام شبكة احترافي متقدم",
+        frame: "فولاذ مجلفن متقدم SPHC",
+        turf: "عشب صناعي عالي الأداء 13500D",
         warranty: "ضمان سنتين شامل",
       },
       features: [
@@ -140,7 +134,6 @@ const specIcons: Record<string, typeof Ruler> = {
   glass: Shield,
   frame: Layers,
   turf: Sun,
-  net: Fence,
   warranty: Award,
 };
 
@@ -149,7 +142,6 @@ const specLabels: Record<string, string> = {
   glass: "الزجاج",
   frame: "الهيكل",
   turf: "العشب",
-  net: "الشبكة",
   warranty: "الضمان",
 };
 
@@ -222,7 +214,7 @@ const PadelCourts = () => {
             </div>
             <h1 className="heading-xl text-foreground mb-4">ملاعب البادل</h1>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              أجود الملاعب بمواصفات عالمية وأسعار شاملة كل شيء
+              أجود الملاعب بمواصفات عالمية — السعر شامل كل شيء من الألف إلى الياء
             </p>
           </motion.div>
         </div>

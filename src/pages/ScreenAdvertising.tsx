@@ -1,43 +1,43 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import {
-  Monitor, MapPin, Zap, Shield, BarChart3, Users, Play, Clock, Tv,
-  Building2, ShoppingBag, Landmark, Send, ExternalLink, ChevronLeft
+  Monitor, MapPin, Zap, Shield, Play, Clock, ChevronLeft, Send, Lock
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
-import screenCorporate from "@/assets/screen-corporate.jpg";
 import screenMall from "@/assets/screen-mall.jpg";
-import screenOutdoor from "@/assets/screen-outdoor.jpg";
 
-const screenLocations = [
-  { icon: ShoppingBag, title: "المولات التجارية", description: "شاشات في أبرز المولات ومراكز التسوق ذات الحركة العالية", count: "120+" },
-  { icon: Building2, title: "المباني التجارية", description: "شاشات في اللوبيات والمداخل الرئيسية للأبراج والشركات", count: "80+" },
-  { icon: Landmark, title: "الشوارع الرئيسية", description: "شاشات LED عملاقة على الطرق والتقاطعات الحيوية", count: "50+" },
-  { icon: MapPin, title: "المواقع الاستراتيجية", description: "مواقع مختارة بعناية لضمان أقصى نسبة مشاهدة وتأثير", count: "250+" },
-];
+interface Location {
+  id: string;
+  name: string;
+  available: boolean;
+  screens?: string;
+  adSlots?: string;
+  adDuration?: string;
+  adDays?: string;
+  adTypes?: string[];
+}
 
-const adManagement = [
-  { icon: Tv, value: "500+", label: "شاشة إعلانية", desc: "شبكة ضخمة من الشاشات عالية الدقة" },
-  { icon: Play, value: "1000+", label: "إعلان نشط", desc: "إعلانات تعمل على مدار الساعة" },
-  { icon: Clock, value: "15-60", label: "ثانية لكل إعلان", desc: "مدة عرض مرنة حسب الباقة" },
-  { icon: Zap, value: "24/7", label: "تشغيل مستمر", desc: "شاشاتنا تعمل دون توقف" },
-];
-
-const advertisers = [
-  { name: "معلن 1", adName: "إعلان ترويجي", link: "#" },
-  { name: "معلن 2", adName: "حملة موسمية", link: "#" },
-  { name: "معلن 3", adName: "إطلاق منتج", link: "#" },
-  { name: "معلن 4", adName: "عرض خاص", link: "#" },
-  { name: "معلن 5", adName: "حملة توعوية", link: "#" },
-  { name: "معلن 6", adName: "إعلان مستمر", link: "#" },
+const locations: Location[] = [
+  {
+    id: "kahf-alnahla",
+    name: "مركز كهف النحلة",
+    available: true,
+    screens: "يتم التحديث",
+    adSlots: "يتم التحديث",
+    adDuration: "15 - 60 ثانية",
+    adDays: "يتم التحديث",
+    adTypes: ["إعلان صوري", "إعلان فيديو", "إعلان تفاعلي"],
+  },
+  { id: "loc-2", name: "موقع جديد — قريبًا", available: false },
+  { id: "loc-3", name: "موقع جديد — قريبًا", available: false },
 ];
 
 const ScreenAdvertising = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
   const [form, setForm] = useState({
     advertiser_name: "",
     ad_name: "",
@@ -62,7 +62,7 @@ const ScreenAdvertising = () => {
         notes: form.notes.trim() || null,
       });
       if (error) throw error;
-      toast({ title: "تم الإرسال بنجاح", description: "سنتواصل معك في أقرب وقت لتفعيل إعلانك" });
+      toast({ title: "تم الإرسال بنجاح", description: "سنتواصل معك في أقرب وقت" });
       setForm({ advertiser_name: "", ad_name: "", store_link: "", duration: "", notes: "" });
       setShowForm(false);
     } catch {
@@ -74,24 +74,12 @@ const ScreenAdvertising = () => {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative pt-28 pb-24 px-6 overflow-hidden bg-foreground text-primary-foreground">
+      {/* Hero — Clean & Minimal */}
+      <section className="relative pt-28 pb-20 px-6 overflow-hidden bg-foreground text-primary-foreground">
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: "linear-gradient(hsl(var(--primary-foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary-foreground)) 1px, transparent 1px)",
           backgroundSize: "60px 60px"
         }} />
-        <motion.div
-          className="absolute top-20 left-10 w-72 h-72 rounded-full blur-[120px]"
-          style={{ background: "hsl(var(--digital) / 0.15)" }}
-          animate={{ scale: [1, 1.3, 1], opacity: [0.08, 0.15, 0.08] }}
-          transition={{ repeat: Infinity, duration: 6 }}
-        />
-        <motion.div
-          className="absolute bottom-10 right-10 w-96 h-96 rounded-full blur-[150px]"
-          style={{ background: "hsl(var(--digital) / 0.1)" }}
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.05, 0.1] }}
-          transition={{ repeat: Infinity, duration: 8 }}
-        />
 
         <div className="container mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -100,26 +88,19 @@ const ScreenAdvertising = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-digital/40 text-digital text-sm font-bold mb-8"
-              >
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-digital/40 text-digital text-sm font-bold mb-8">
                 <Monitor className="w-4 h-4" />
-                <span>Screen Advertising</span>
-              </motion.div>
+                Screen Advertising
+              </div>
 
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight leading-tight mb-6">
-                أعلن على
-                <span className="block bg-gradient-to-l from-digital to-primary-foreground bg-clip-text text-transparent">
-                  أكبر شبكة شاشات
-                </span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-6">
+                الشاشات الإعلانية
+                <span className="block text-digital/80 mt-2">الرقمية</span>
               </h1>
 
-              <p className="text-primary-foreground/70 text-lg leading-relaxed mb-10 max-w-lg">
-                نوفر لك شبكة متكاملة من الشاشات الإعلانية الرقمية عالية الدقة في أبرز المواقع
-                الاستراتيجية. اجعل إعلانك يصل لملايين المشاهدين يومياً.
+              <p className="text-primary-foreground/60 text-lg leading-relaxed mb-10 max-w-lg">
+                شاشات إعلانية رقمية عالية الدقة في مواقع استراتيجية.
+                اعرض إعلانك أمام آلاف المشاهدين يوميًا.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4">
@@ -134,7 +115,7 @@ const ScreenAdvertising = () => {
                   href="#locations"
                   className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-primary-foreground/30 font-medium hover:bg-primary-foreground/10 transition-all"
                 >
-                  اكتشف المواقع
+                  مواقع الشاشات
                 </a>
               </div>
             </motion.div>
@@ -143,230 +124,157 @@ const ScreenAdvertising = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="relative"
             >
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-3">
-                  <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl overflow-hidden border border-primary-foreground/10 shadow-2xl">
-                    <img src={screenMall} alt="شاشات المولات" className="w-full h-52 object-cover" />
-                  </motion.div>
-                  <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl overflow-hidden border border-primary-foreground/10">
-                    <img src={screenCorporate} alt="شاشات الشركات" className="w-full h-36 object-cover" />
-                  </motion.div>
-                </div>
-                <div className="space-y-3 pt-10">
-                  <motion.div whileHover={{ scale: 1.03 }} className="rounded-2xl overflow-hidden border border-primary-foreground/10">
-                    <img src={screenOutdoor} alt="شاشات خارجية" className="w-full h-36 object-cover" />
-                  </motion.div>
-                  <motion.div className="rounded-2xl border border-digital/20 p-6 flex flex-col items-center justify-center h-52 bg-digital/10 backdrop-blur-sm">
-                    <motion.span
-                      className="text-5xl font-black"
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.8, type: "spring" }}
-                    >
-                      500+
-                    </motion.span>
-                    <span className="text-primary-foreground/60 text-sm mt-2">شاشة إعلانية نشطة</span>
-                  </motion.div>
-                </div>
+              <div className="rounded-2xl overflow-hidden border border-primary-foreground/10 shadow-2xl">
+                <img src={screenMall} alt="شاشات إعلانية" className="w-full h-80 object-cover" />
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* What is Screen Advertising */}
+      {/* What We Offer — Simplified */}
       <section className="section-padding bg-background">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12"
           >
-            <h2 className="heading-lg text-foreground mb-4">ما هي الشاشات الإعلانية الرقمية؟</h2>
-            <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
-              الوسيلة الأقوى والأكثر تأثيراً في عالم الإعلان الحديث.
-              تعرض محتواك بجودة فائقة أمام ملايين المشاهدين يومياً.
+            <h2 className="heading-lg text-foreground mb-4">خدماتنا</h2>
+            <p className="text-muted-foreground text-lg max-w-lg mx-auto">
+              حلول إعلانية رقمية متكاملة
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
-              { icon: Monitor, title: "شاشات LED عالية الدقة", description: "أحدث تقنيات العرض الرقمي بدقة 4K تضمن وضوح إعلانك في جميع الظروف" },
-              { icon: Zap, title: "تحديث فوري عن بُعد", description: "تحكّم بمحتوى إعلانك في الوقت الفعلي من أي مكان عبر نظام إدارة ذكي" },
-              { icon: Shield, title: "تشغيل مستمر 24/7", description: "شاشاتنا تعمل دون توقف لضمان أقصى تعرّض لإعلانك طوال اليوم" },
-              { icon: BarChart3, title: "تقارير أداء مفصّلة", description: "إحصائيات دقيقة عن عدد المشاهدات وأداء حملتك الإعلانية" },
-              { icon: Users, title: "وصول لملايين المشاهدين", description: "شبكة شاشات في أكثر المواقع ازدحاماً تضمن أوسع انتشار ممكن" },
-              { icon: Play, title: "محتوى ديناميكي", description: "إمكانية عرض فيديو، صور، وتصاميم متحركة بجودة سينمائية" },
-            ].map((feature, index) => (
+              { icon: Monitor, title: "شاشات LED", desc: "عرض بدقة عالية في جميع الظروف" },
+              { icon: Zap, title: "تحديث فوري", desc: "تحكّم بمحتوى إعلانك عن بُعد" },
+              { icon: Shield, title: "تشغيل مستمر", desc: "شاشاتنا تعمل على مدار الساعة" },
+              { icon: Play, title: "محتوى متنوع", desc: "فيديو، صور، وتصاميم متحركة" },
+              { icon: Clock, title: "مدة مرنة", desc: "حدد مدة عرض إعلانك حسب حاجتك" },
+              { icon: MapPin, title: "مواقع مختارة", desc: "أماكن استراتيجية ذات حركة عالية" },
+            ].map((item, index) => (
               <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
-                className="group p-7 rounded-2xl bg-card border border-border hover:border-digital/30 hover:shadow-card transition-all"
-              >
-                <div className="w-12 h-12 rounded-xl bg-digital/10 text-digital flex items-center justify-center mb-4 group-hover:bg-digital group-hover:text-digital-foreground transition-all duration-300">
-                  <feature.icon className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Screen Locations */}
-      <section id="locations" className="section-padding bg-card">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="heading-lg text-foreground mb-4">أماكن تواجد الشاشات</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              شاشاتنا موزّعة في أكثر المواقع حيوية وازدحاماً
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {screenLocations.map((loc, index) => (
-              <motion.div
-                key={loc.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex gap-5 p-7 rounded-2xl bg-background border border-border hover:border-digital/30 hover:shadow-card transition-all group"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-digital/10 text-digital flex items-center justify-center flex-shrink-0 group-hover:bg-digital group-hover:text-digital-foreground transition-all duration-300">
-                  <loc.icon className="w-7 h-7" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-bold">{loc.title}</h3>
-                    <span className="text-sm font-bold bg-digital/10 text-digital px-3 py-1 rounded-full">{loc.count}</span>
-                  </div>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{loc.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Ad Management */}
-      <section className="section-padding bg-foreground text-primary-foreground">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">إدارة الإعلانات</h2>
-            <p className="text-primary-foreground/60 text-lg max-w-2xl mx-auto">
-              نظام متكامل لإدارة وعرض إعلاناتك بأعلى كفاءة
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
-            {adManagement.map((item, index) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center p-6 rounded-2xl border border-primary-foreground/10 bg-digital/5"
-              >
-                <item.icon className="w-8 h-8 mx-auto mb-3 text-digital" />
-                <motion.div
-                  className="text-4xl md:text-5xl font-black mb-1"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 + 0.3, type: "spring" }}
-                >
-                  {item.value}
-                </motion.div>
-                <div className="text-sm font-bold mb-1">{item.label}</div>
-                <div className="text-xs text-primary-foreground/50">{item.desc}</div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* How it works */}
-          <div className="max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold text-center mb-10">آلية تشغيل الإعلان</h3>
-            <div className="grid md:grid-cols-4 gap-4">
-              {[
-                { step: "01", title: "اختر موقعك", desc: "حدد الشاشات والمواقع" },
-                { step: "02", title: "أرسل المحتوى", desc: "أرسل تصميمك أو نصممه لك" },
-                { step: "03", title: "نعرض إعلانك", desc: "بث فوري على الشاشات" },
-                { step: "04", title: "تابع الأداء", desc: "تقارير مفصلة عن حملتك" },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.step}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.12 }}
-                  className="text-center p-5 rounded-2xl border border-primary-foreground/10"
-                >
-                  <div className="w-14 h-14 rounded-full border-2 border-digital/40 text-digital flex items-center justify-center text-xl font-black mx-auto mb-3">
-                    {item.step}
-                  </div>
-                  <h4 className="font-bold mb-1">{item.title}</h4>
-                  <p className="text-xs text-primary-foreground/50">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Advertisers */}
-      <section className="section-padding bg-background">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="heading-lg text-foreground mb-4">المعلنين الحاليين</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              إعلانات نشطة على شبكة شاشاتنا
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {advertisers.map((ad, index) => (
-              <motion.div
-                key={index}
+                key={item.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.08 }}
-                className="p-6 rounded-2xl bg-card border border-border hover:shadow-card transition-all group"
+                className="group p-6 rounded-2xl bg-card border border-border hover:border-digital/30 transition-all"
               >
-                <div className="w-full h-36 rounded-xl bg-muted flex items-center justify-center mb-4">
-                  <Monitor className="w-10 h-10 text-muted-foreground/40" />
+                <div className="w-11 h-11 rounded-xl bg-digital/10 text-digital flex items-center justify-center mb-4 group-hover:bg-digital group-hover:text-digital-foreground transition-all duration-300">
+                  <item.icon className="w-5 h-5" />
                 </div>
-                <h3 className="font-bold text-lg mb-1">{ad.name}</h3>
-                <p className="text-muted-foreground text-sm mb-3">{ad.adName}</p>
-                {ad.link !== "#" && (
-                  <a href={ad.link} target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-medium text-foreground hover:gap-2 transition-all">
-                    زيارة الموقع <ExternalLink className="w-3 h-3" />
-                  </a>
+                <h3 className="font-bold mb-1">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Locations — Progressive */}
+      <section id="locations" className="section-padding bg-card">
+        <div className="container mx-auto max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="heading-lg text-foreground mb-4">مواقع الشاشات</h2>
+            <p className="text-muted-foreground text-lg max-w-lg mx-auto">
+              اختر الموقع لعرض خيارات الإعلان المتاحة
+            </p>
+          </motion.div>
+
+          <div className="space-y-4">
+            {locations.map((loc, index) => (
+              <motion.div
+                key={loc.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                {loc.available ? (
+                  <button
+                    onClick={() => setSelectedLocation(selectedLocation?.id === loc.id ? null : loc)}
+                    className={`w-full text-right p-6 rounded-2xl border-2 transition-all ${
+                      selectedLocation?.id === loc.id
+                        ? "bg-digital/5 border-digital/40"
+                        : "bg-background border-border hover:border-digital/20"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 rounded-xl bg-digital/10 text-digital flex items-center justify-center">
+                          <MapPin className="w-6 h-6" />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-foreground">{loc.name}</h3>
+                          <span className="text-xs text-digital font-medium">متاح — اضغط لعرض التفاصيل</span>
+                        </div>
+                      </div>
+                      <ChevronLeft className={`w-5 h-5 text-muted-foreground transition-transform ${
+                        selectedLocation?.id === loc.id ? "rotate-90" : ""
+                      }`} />
+                    </div>
+
+                    <AnimatePresence>
+                      {selectedLocation?.id === loc.id && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <div className="grid grid-cols-2 gap-3 mt-6 pt-6 border-t border-border">
+                            {[
+                              { label: "عدد الشاشات", value: loc.screens },
+                              { label: "عدد الإعلانات", value: loc.adSlots },
+                              { label: "مدة الإعلان", value: loc.adDuration },
+                              { label: "عدد الأيام", value: loc.adDays },
+                            ].map((item) => (
+                              <div key={item.label} className="p-3 rounded-xl bg-card border border-border">
+                                <p className="text-xs text-muted-foreground mb-1">{item.label}</p>
+                                <p className="text-sm font-bold text-foreground">{item.value}</p>
+                              </div>
+                            ))}
+                          </div>
+                          {loc.adTypes && (
+                            <div className="mt-4">
+                              <p className="text-xs text-muted-foreground mb-2">أنواع الإعلان المتاحة</p>
+                              <div className="flex flex-wrap gap-2">
+                                {loc.adTypes.map((type) => (
+                                  <span key={type} className="px-3 py-1 rounded-full bg-digital/10 text-digital text-xs font-medium">
+                                    {type}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </button>
+                ) : (
+                  <div className="w-full p-6 rounded-2xl border-2 border-border bg-background/50 opacity-60">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
+                        <Lock className="w-5 h-5 text-muted-foreground" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-muted-foreground">{loc.name}</h3>
+                        <span className="text-xs text-muted-foreground">قريبًا</span>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </motion.div>
             ))}
@@ -375,16 +283,16 @@ const ScreenAdvertising = () => {
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-card">
+      <section className="section-padding bg-background">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="heading-lg text-foreground mb-6">جاهز لإطلاق إعلانك؟</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
-              انضم لأكثر من 1000 علامة تجارية تثق في شبكة شاشاتنا
+            <h2 className="heading-lg text-foreground mb-4">جاهز لإطلاق إعلانك؟</h2>
+            <p className="text-muted-foreground text-lg max-w-lg mx-auto mb-8">
+              تواصل معنا وسنساعدك في اختيار أفضل خيار إعلاني
             </p>
             <button
               onClick={() => setShowForm(true)}
@@ -397,7 +305,7 @@ const ScreenAdvertising = () => {
         </div>
       </section>
 
-      {/* Ad Request Form Modal */}
+      {/* Form Modal */}
       <AnimatePresence>
         {showForm && (
           <motion.div

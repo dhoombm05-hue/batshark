@@ -1,48 +1,59 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Sparkles, Star, Shield, Gem, ArrowLeft } from "lucide-react";
+import {
+  Sparkles, Shield, Droplets, Cog, ArrowLeft, Check, Wrench, Lock
+} from "lucide-react";
 import umbrixLogo from "@/assets/umbrix-logo.jpg";
 
-const features = [
-  {
-    icon: Star,
-    title: "جودة استثنائية",
-    description: "نلتزم بأعلى معايير الجودة في كل تفاصيل منتجاتنا وخدماتنا",
-  },
+const specs = [
   {
     icon: Shield,
-    title: "موثوقية عالية",
-    description: "ثقة عملائنا هي أولويتنا من خلال التزامنا بالمواعيد والجودة",
+    title: "هيكل ستانلس ستيل",
+    points: [
+      "مقاوم للتآكل — عمر تشغيلي يصل إلى 10 سنوات",
+      "قدرة تحمّل تصل إلى 300 كجم",
+      "وزن تقريبي 60 كجم",
+    ],
   },
   {
-    icon: Gem,
-    title: "تصاميم فاخرة",
-    description: "تصاميم مبتكرة تجمع بين الأناقة والعملية بأسلوب عصري",
+    icon: Droplets,
+    title: "غطاء Oxford 600D",
+    points: [
+      "عازل للحرارة ومقاوم للأوساخ",
+      "طبقة فضية مقاومة للماء — 2000mm",
+      "حواف ملحومة حراريًا لمنع التسريب",
+    ],
   },
   {
-    icon: Sparkles,
-    title: "ابتكار مستمر",
-    description: "نسعى دائماً لتقديم حلول جديدة ومبتكرة تلبي تطلعات السوق",
+    icon: Cog,
+    title: "نظام هيدروليكي",
+    points: [
+      "فتح وإغلاق سلس وسريع",
+      "تشغيل يدوي أو أوتوماتيكي",
+      "محرك + بطارية + نظام تحكم",
+    ],
+  },
+  {
+    icon: Wrench,
+    title: "التثبيت والإكسسوارات",
+    points: [
+      "ملحقات تثبيت كاملة — براغي وقواعد",
+      "صفائح تثبيت وأقفال أمان",
+      "تصميم ثابت وآمن للاستخدام اليومي",
+    ],
   },
 ];
 
 const Umbrix = () => {
   return (
     <>
-      {/* Hero - Dark Premium */}
+      {/* Hero */}
       <section className="relative pt-28 pb-24 px-6 overflow-hidden bg-foreground text-primary-foreground">
-        {/* Subtle gold gradient accents */}
         <motion.div
           className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-[180px]"
           style={{ background: "hsl(var(--umbrix) / 0.15)" }}
           animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
           transition={{ repeat: Infinity, duration: 8 }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-1/4 w-72 h-72 rounded-full blur-[150px]"
-          style={{ background: "hsl(var(--umbrix) / 0.1)" }}
-          animate={{ scale: [1.1, 1, 1.1], opacity: [0.08, 0.15, 0.08] }}
-          transition={{ repeat: Infinity, duration: 6 }}
         />
 
         <div className="container mx-auto relative z-10 text-center">
@@ -64,7 +75,7 @@ const Umbrix = () => {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-umbrix/30 text-umbrix text-sm font-bold mb-6"
           >
             <Sparkles className="w-4 h-4" />
-            علامة تجارية فاخرة
+            مظلّة متحركة فاخرة
           </motion.div>
 
           <motion.h1
@@ -82,29 +93,37 @@ const Umbrix = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
-            className="text-primary-foreground/60 text-lg max-w-xl mx-auto mb-10"
+            className="text-primary-foreground/60 text-lg max-w-lg mx-auto mb-10"
           >
-            مشروع مستقل تابع لشركة BATSHARK يقدم حلولاً مبتكرة ومتطورة
-            بأعلى معايير الجودة والفخامة
+            مظلّة متحركة بتصميم عصري وهيكل ستانلس ستيل — حماية وأناقة في كل مكان
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link
               to="/contact"
               className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-full bg-umbrix text-umbrix-foreground font-bold text-lg hover:opacity-90 transition-all hover:scale-105"
             >
-              تواصل معنا
+              اطلب الآن
               <ArrowLeft className="w-5 h-5" />
             </Link>
+            <a
+              href="https://wa.me/966560340081"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-primary-foreground/20 font-medium hover:bg-primary-foreground/10 transition-all"
+            >
+              تواصل عبر واتساب
+            </a>
           </motion.div>
         </div>
       </section>
 
-      {/* Features */}
+      {/* Specs */}
       <section className="section-padding bg-background">
         <div className="container mx-auto">
           <motion.div
@@ -113,58 +132,87 @@ const Umbrix = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="heading-lg text-foreground mb-4">لماذا Umbrix؟</h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              نتميّز بمعايير استثنائية تجعلنا الخيار الأمثل
+            <h2 className="heading-lg text-foreground mb-4">المواصفات</h2>
+            <p className="text-muted-foreground text-lg max-w-lg mx-auto">
+              صُممت لتدوم — مواد فاخرة وتقنية متطورة
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {features.map((feature, index) => (
+            {specs.map((spec, index) => (
               <motion.div
-                key={feature.title}
+                key={spec.title}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group p-8 rounded-2xl bg-card border border-border hover:border-umbrix/30 hover:shadow-card transition-all"
+                className="group p-8 rounded-2xl bg-card border border-border hover:border-umbrix/30 transition-all"
               >
                 <div className="w-14 h-14 rounded-2xl bg-umbrix/10 flex items-center justify-center mb-5 group-hover:bg-umbrix group-hover:text-umbrix-foreground transition-all duration-300">
-                  <feature.icon className="w-7 h-7" />
+                  <spec.icon className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-foreground mb-2">{feature.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-bold text-foreground mb-4">{spec.title}</h3>
+                <ul className="space-y-2.5">
+                  {spec.points.map((point) => (
+                    <li key={point} className="flex items-start gap-2.5 text-sm text-muted-foreground">
+                      <Check className="w-4 h-4 text-umbrix flex-shrink-0 mt-0.5" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Coming Soon / More Details */}
+      {/* Highlights */}
       <section className="section-padding bg-card">
+        <div className="container mx-auto">
+          <div className="max-w-3xl mx-auto grid md:grid-cols-3 gap-6 text-center">
+            {[
+              { icon: Shield, label: "متانة عالية", sub: "عمر تشغيلي 10 سنوات" },
+              { icon: Lock, label: "أقفال أمان", sub: "تثبيت آمن ومستقر" },
+              { icon: Cog, label: "تشغيل ذكي", sub: "يدوي أو أوتوماتيكي" },
+            ].map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="p-6 rounded-2xl bg-background border border-border"
+              >
+                <div className="w-12 h-12 rounded-xl bg-umbrix/10 flex items-center justify-center mx-auto mb-3">
+                  <item.icon className="w-6 h-6 text-umbrix" />
+                </div>
+                <h4 className="font-bold text-foreground mb-1">{item.label}</h4>
+                <p className="text-sm text-muted-foreground">{item.sub}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-padding bg-background">
         <div className="container mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <div className="max-w-2xl mx-auto">
-              <div className="w-20 h-20 rounded-full bg-umbrix/10 flex items-center justify-center mx-auto mb-6">
-                <Sparkles className="w-10 h-10 text-umbrix" />
-              </div>
-              <h2 className="heading-md text-foreground mb-4">المزيد قريباً</h2>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                نعمل على تطوير المزيد من المنتجات والخدمات تحت علامة Umbrix.
-                تابعنا لتكون أول من يعرف عن آخر المستجدات.
-              </p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-bold hover:opacity-90 transition-all hover:scale-105"
-              >
-                ابقَ على تواصل
-                <ArrowLeft className="w-5 h-5" />
-              </Link>
-            </div>
+            <h2 className="heading-md text-foreground mb-4">مهتم بمظلّة Umbrix؟</h2>
+            <p className="text-muted-foreground text-lg max-w-lg mx-auto mb-8">
+              تواصل معنا للحصول على عرض سعر مخصص
+            </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-bold hover:opacity-90 transition-all hover:scale-105"
+            >
+              تواصل معنا
+              <ArrowLeft className="w-5 h-5" />
+            </Link>
           </motion.div>
         </div>
       </section>
