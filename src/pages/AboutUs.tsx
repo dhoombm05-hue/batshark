@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Eye, Target, Heart, ArrowLeft, Monitor, Sparkles, Trophy } from "lucide-react";
 import logo from "@/assets/logo.png";
+import TeamMembers from "@/components/TeamMembers";
 
 const AboutUs = () => {
   return (
@@ -120,6 +121,9 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
+
+      {/* Team Members */}
+      <TeamMembers />
 
       {/* CTA */}
       <section className="section-padding bg-primary text-primary-foreground">
