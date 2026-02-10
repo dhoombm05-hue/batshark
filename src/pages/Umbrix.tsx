@@ -200,7 +200,12 @@ const Umbrix = () => {
               <span className="text-6xl md:text-8xl font-black text-umbrix">1,950</span>
               <span className="text-2xl text-primary-foreground/60 mr-2">ريال</span>
             </div>
-            <p className="text-primary-foreground/50 text-lg mb-10">سعر رمزي — حماية كاملة لسيارتك</p>
+            <p className="text-primary-foreground/50 text-lg mb-4">سعر رمزي — حماية كاملة لسيارتك</p>
+
+            <div className="flex flex-col gap-2 max-w-md mx-auto mb-10 text-primary-foreground/60 text-sm">
+              <p>📲 للاستفسار والتفاصيل يتم التواصل عبر واتساب</p>
+              <p>⚡ حل عملي وسريع التركيب للاستخدام اليومي</p>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

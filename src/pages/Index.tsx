@@ -1,26 +1,25 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Monitor, Trophy, Sparkles, ArrowLeft, ChevronDown } from "lucide-react";
+import { Monitor, Trophy, Sparkles, ArrowLeft } from "lucide-react";
 import logo from "@/assets/logo.png";
 import heroDark from "@/assets/hero-dark.jpg";
-import TeamMembers from "@/components/TeamMembers";
 
-const sections = [
-  {
-    title: "الشاشات الإعلانية",
-    subtitle: "Screen Advertising",
-    description: "شاشات رقمية عالية الدقة في مواقع استراتيجية",
-    icon: Monitor,
-    link: "/screen-advertising",
-    color: "digital",
-  },
+const projects = [
   {
     title: "ملاعب البادل",
     subtitle: "Padel Courts",
     description: "ملاعب إسبانية وصينية بمواصفات عالمية",
     icon: Trophy,
     link: "/padel-courts",
-    color: "padel",
+    colorClass: "padel",
+  },
+  {
+    title: "الشاشات الإعلانية",
+    subtitle: "Screen Advertising",
+    description: "شاشات رقمية عالية الدقة في مواقع استراتيجية",
+    icon: Monitor,
+    link: "/screen-advertising",
+    colorClass: "digital",
   },
   {
     title: "Umbrix",
@@ -28,179 +27,143 @@ const sections = [
     description: "مظلّة متحركة فاخرة بتصميم عصري",
     icon: Sparkles,
     link: "/umbrix",
-    color: "umbrix",
+    colorClass: "umbrix",
   },
 ];
+
+const colorMap: Record<string, { bg: string; text: string; border: string; iconBg: string; btnBg: string; btnText: string }> = {
+  padel: {
+    bg: "bg-padel/5",
+    text: "text-padel",
+    border: "border-padel/20 hover:border-padel/50",
+    iconBg: "bg-padel/10 group-hover:bg-padel",
+    btnBg: "bg-padel",
+    btnText: "text-padel-foreground",
+  },
+  digital: {
+    bg: "bg-digital/5",
+    text: "text-digital",
+    border: "border-digital/20 hover:border-digital/50",
+    iconBg: "bg-digital/10 group-hover:bg-digital",
+    btnBg: "bg-digital",
+    btnText: "text-digital-foreground",
+  },
+  umbrix: {
+    bg: "bg-umbrix/5",
+    text: "text-umbrix",
+    border: "border-umbrix/20 hover:border-umbrix/50",
+    iconBg: "bg-umbrix/10 group-hover:bg-umbrix",
+    btnBg: "bg-umbrix",
+    btnText: "text-umbrix-foreground",
+  },
+};
 
 const Index = () => {
   return (
     <>
-      {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero — compact */}
+      <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <img src={heroDark} alt="" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-foreground/70" />
         </div>
 
-        <div className="container mx-auto px-6 relative z-10 text-center pt-20">
+        <div className="container mx-auto px-6 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="mb-8"
+            className="mb-6"
           >
-            <img src={logo} alt="BATSHARK" className="h-20 md:h-28 w-auto mx-auto invert" />
+            <img src={logo} alt="BATSHARK" className="h-16 md:h-24 w-auto mx-auto invert" />
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-tight text-primary-foreground mb-6"
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tight leading-tight text-primary-foreground mb-4"
           >
             حلول ذكية
-            <span className="block mt-2 text-primary-foreground/60">تبني المستقبل</span>
+            <span className="block mt-1 text-primary-foreground/60 text-xl md:text-2xl font-bold">
+              تبني المستقبل
+            </span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-primary-foreground/50 text-lg md:text-xl max-w-2xl mx-auto mb-12"
+            className="text-primary-foreground/50 text-base md:text-lg max-w-xl mx-auto"
           >
-            شركة متخصصة في الحلول الذكية، من الإعلانات الرقمية إلى المشاريع الرياضية والحلول المبتكرة
+            شركة متخصصة في الحلول الذكية — من الإعلانات الرقمية إلى المشاريع الرياضية والحلول المبتكرة
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <a
-              href="#services"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-full bg-primary-foreground text-foreground font-bold text-lg hover:scale-105 transition-all"
-            >
-              اكتشف خدماتنا
-              <ChevronDown className="w-5 h-5" />
-            </a>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full border border-primary-foreground/30 text-primary-foreground font-medium hover:bg-primary-foreground/10 transition-all"
-            >
-              تواصل معنا
-            </Link>
-          </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-            className="w-6 h-10 rounded-full border-2 border-primary-foreground/30 flex items-start justify-center p-2"
-          >
-            <motion.div className="w-1.5 h-1.5 rounded-full bg-primary-foreground/50" />
-          </motion.div>
-        </motion.div>
       </section>
 
-      {/* Services */}
-      <section id="services" className="section-padding bg-background">
+      {/* Projects — 3 large cards */}
+      <section className="py-16 px-6 bg-background">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-10"
           >
-            <h2 className="heading-lg text-foreground mb-3">خدماتنا</h2>
-            <p className="text-muted-foreground text-lg">اختر القسم الذي يهمك</p>
+            <h2 className="heading-lg text-foreground mb-2">مشاريعنا</h2>
+            <p className="text-muted-foreground">اختر المشروع الذي يهمك</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {sections.map((section, index) => (
-              <motion.div
-                key={section.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.12 }}
-              >
-                <Link
-                  to={section.link}
-                  className="group relative block p-8 rounded-2xl bg-card border border-border overflow-hidden transition-all duration-500 hover:shadow-elevated hover:-translate-y-2"
+          <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+            {projects.map((project, index) => {
+              const colors = colorMap[project.colorClass];
+              return (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="relative z-10">
-                    <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                      <section.icon className="w-7 h-7" />
+                  <Link
+                    to={project.link}
+                    className={`group relative block p-8 rounded-2xl ${colors.bg} border ${colors.border} overflow-hidden transition-all duration-300 hover:shadow-elevated hover:-translate-y-1`}
+                  >
+                    <div className={`w-14 h-14 rounded-2xl ${colors.iconBg} flex items-center justify-center mb-5 group-hover:text-primary-foreground transition-all duration-300`}>
+                      <project.icon className="w-7 h-7" />
                     </div>
-                    <p className="text-xs font-bold tracking-widest uppercase text-primary mb-2">
-                      {section.subtitle}
+
+                    <p className={`text-xs font-bold tracking-widest uppercase ${colors.text} mb-1`}>
+                      {project.subtitle}
                     </p>
-                    <h3 className="text-xl font-black text-foreground mb-2">{section.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-5">
-                      {section.description}
+                    <h3 className="text-xl font-black text-foreground mb-2">{project.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+                      {project.description}
                     </p>
-                    <div className="inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all duration-300">
-                      <span>اكتشف المزيد</span>
+
+                    <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full ${colors.btnBg} ${colors.btnText} text-sm font-bold group-hover:gap-3 transition-all duration-300`}>
+                      <span>الدخول</span>
                       <ArrowLeft className="w-4 h-4" />
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* Team Members */}
-      <TeamMembers />
-
-      {/* Brand Boost */}
-      <section className="py-20 px-6 bg-foreground text-primary-foreground">
-        <div className="container mx-auto text-center max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <img src={logo} alt="BATSHARK" className="h-12 w-auto mx-auto mb-8 invert" />
-            <p className="text-xl md:text-2xl font-bold leading-relaxed text-primary-foreground/80 mb-8">
-              شركة متخصصة في الحلول الذكية — من الإعلانات الرقمية
-              إلى المشاريع الرياضية والحلول المبتكرة.
-              <br />
-              نقدم خدمات متكاملة بأعلى معايير الجودة والاحترافية.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-20 px-6 bg-card">
+      {/* Team — minimal footer-style */}
+      <section className="py-12 px-6 bg-card border-t border-border">
         <div className="container mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <p className="text-muted-foreground text-sm mb-4">الهيئة الإدارية</p>
+          <Link
+            to="/about"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-foreground font-medium hover:bg-muted transition-all text-sm"
           >
-            <h2 className="heading-lg text-foreground mb-4">جاهز تبدأ؟</h2>
-            <p className="text-muted-foreground text-lg max-w-lg mx-auto mb-8">
-              تواصل معنا واحصل على استشارة مجانية
-            </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center gap-2 px-10 py-4 rounded-full bg-primary text-primary-foreground font-bold text-lg hover:opacity-90 transition-all hover:scale-105"
-            >
-              تواصل معنا
-              <ArrowLeft className="w-5 h-5" />
-            </Link>
-          </motion.div>
+            استعراض أعضاء الشركة
+            <ArrowLeft className="w-4 h-4" />
+          </Link>
         </div>
       </section>
     </>
