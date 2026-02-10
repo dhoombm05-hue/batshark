@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Briefcase, Star, Phone, Mail, ChevronLeft, X, Wrench } from "lucide-react";
+import { User, Briefcase, Star, Phone, Mail, ChevronLeft, X, Wrench, Crown, Target, TrendingUp, Megaphone, Code } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -16,13 +16,15 @@ interface MemberInfo {
   skills: string[];
   phone: string;
   email: string;
+  accentHsl: string; // HSL values for accent
+  icon: typeof User;
 }
 
 const members: MemberInfo[] = [
   {
     name: "عبدالرحمن بن بندر محبوب",
-    title: "الرئيس التنفيذي / مدير العمليات",
-    bio: "",
+    title: "الرئيس التنفيذي – مدير العمليات",
+    bio: "قائد أعمال يتمتع برؤية استراتيجية شاملة وخبرة عملية في إدارة المشاريع وبناء الحلول المتكاملة. يقود عبدالرحمن تطوير الشركة من الفكرة إلى التنفيذ، مع تركيز واضح على الابتكار، وتحسين الأداء، وبناء علاقات طويلة المدى مع العملاء والشركاء. يؤمن بأن النجاح المستدام يبدأ من التخطيط الذكي، والعمل المنظم، واتخاذ القرارات المبنية على البيانات، مع اهتمام خاص بجودة التنفيذ وتجربة العميل.",
     experience: [
       "إدارة المشاريع الكبيرة والصغيرة بكفاءة عالية",
       "خبرة في العمل الحر وتنفيذ المشاريع المستقلة",
@@ -37,6 +39,8 @@ const members: MemberInfo[] = [
     ],
     phone: "0560340081",
     email: "dhoombm05@gmail.com",
+    accentHsl: "217 91% 60%",
+    icon: Crown,
   },
   {
     name: "فهد بن سلطان المحبوب",
@@ -54,6 +58,8 @@ const members: MemberInfo[] = [
     skills: [],
     phone: "0506191078",
     email: "f.binsultan0@gmail.com",
+    accentHsl: "162 63% 41%",
+    icon: Target,
   },
   {
     name: "محمد تركي الداود",
@@ -69,6 +75,8 @@ const members: MemberInfo[] = [
     ],
     phone: "0501061221",
     email: "mtm.aldawoud@gmail.com",
+    accentHsl: "270 60% 55%",
+    icon: Code,
   },
   {
     name: "سعد سلطان المحبوب",
@@ -96,6 +104,8 @@ const members: MemberInfo[] = [
     ],
     phone: "0581998195",
     email: "s3d.snm@gmail.com",
+    accentHsl: "38 92% 50%",
+    icon: TrendingUp,
   },
   {
     name: "نايف محمد المطيري",
@@ -116,6 +126,8 @@ const members: MemberInfo[] = [
     ],
     phone: "0555623241",
     email: "nayf2011245.9@gmail.com",
+    accentHsl: "340 65% 55%",
+    icon: Megaphone,
   },
 ];
 
@@ -136,27 +148,50 @@ const TeamMembers = () => {
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {members.map((member, index) => (
-            <motion.button
-              key={member.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08 }}
-              onClick={() => setSelectedMember(member)}
-              className="group text-right p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-elevated transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                <User className="w-6 h-6" />
-              </div>
-              <h3 className="text-lg font-bold text-foreground mb-1">{member.name}</h3>
-              <p className="text-sm text-muted-foreground mb-4">{member.title}</p>
-              <div className="flex items-center gap-2 text-xs font-bold text-primary group-hover:gap-3 transition-all">
-                <span>عرض التفاصيل</span>
-                <ChevronLeft className="w-3.5 h-3.5" />
-              </div>
-            </motion.button>
-          ))}
+          {members.map((member, index) => {
+            const IconComp = member.icon;
+            return (
+              <motion.button
+                key={member.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
+                onClick={() => setSelectedMember(member)}
+                className="group text-right p-6 rounded-2xl bg-card border border-border hover:shadow-elevated transition-all duration-300 hover:-translate-y-1 relative overflow-hidden"
+              >
+                {/* Subtle gradient accent bar */}
+                <div
+                  className="absolute top-0 right-0 w-full h-1 opacity-60 group-hover:opacity-100 transition-opacity"
+                  style={{ background: `linear-gradient(to left, hsl(${member.accentHsl}), hsl(${member.accentHsl} / 0.3))` }}
+                />
+
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 transition-all duration-300"
+                  style={{
+                    background: `hsl(${member.accentHsl} / 0.1)`,
+                    color: `hsl(${member.accentHsl})`,
+                  }}
+                >
+                  <IconComp className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-1">{member.name}</h3>
+                <p
+                  className="text-sm font-medium mb-4"
+                  style={{ color: `hsl(${member.accentHsl})` }}
+                >
+                  {member.title}
+                </p>
+                <div
+                  className="flex items-center gap-2 text-xs font-bold group-hover:gap-3 transition-all"
+                  style={{ color: `hsl(${member.accentHsl})` }}
+                >
+                  <span>عرض التفاصيل</span>
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </div>
+              </motion.button>
+            );
+          })}
         </div>
       </div>
 
@@ -174,106 +209,135 @@ const TeamMembers = () => {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-background rounded-3xl p-6 md:p-8 max-w-lg w-full shadow-elevated max-h-[85vh] overflow-y-auto"
+              className="bg-background rounded-3xl max-w-lg w-full shadow-elevated max-h-[85vh] overflow-y-auto"
             >
-              <div className="flex items-start justify-between mb-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <User className="w-6 h-6 text-primary" />
+              {/* Header with accent gradient */}
+              <div
+                className="p-6 md:p-8 rounded-t-3xl relative"
+                style={{
+                  background: `linear-gradient(135deg, hsl(${selectedMember.accentHsl} / 0.08), hsl(${selectedMember.accentHsl} / 0.03))`,
+                }}
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex items-center gap-4">
+                    <div
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                      style={{
+                        background: `hsl(${selectedMember.accentHsl} / 0.15)`,
+                        color: `hsl(${selectedMember.accentHsl})`,
+                      }}
+                    >
+                      <selectedMember.icon className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground">{selectedMember.name}</h3>
+                      <p
+                        className="text-sm font-medium"
+                        style={{ color: `hsl(${selectedMember.accentHsl})` }}
+                      >
+                        {selectedMember.title}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground">{selectedMember.name}</h3>
-                    <p className="text-sm text-muted-foreground">{selectedMember.title}</p>
-                  </div>
+                  <button
+                    onClick={() => setSelectedMember(null)}
+                    className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors flex-shrink-0"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
-                <button
-                  onClick={() => setSelectedMember(null)}
-                  className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors flex-shrink-0"
-                >
-                  <X className="w-4 h-4" />
-                </button>
               </div>
 
-              <Accordion type="single" collapsible className="space-y-2">
-                {selectedMember.bio && (
-                  <AccordionItem value="bio" className="border rounded-xl px-4 border-border">
+              {/* Content */}
+              <div className="p-6 md:px-8 md:pb-8 pt-2">
+                <Accordion type="single" collapsible className="space-y-2">
+                  {selectedMember.bio && (
+                    <AccordionItem value="bio" className="border rounded-xl px-4 border-border">
+                      <AccordionTrigger className="hover:no-underline gap-3">
+                        <div className="flex items-center gap-3">
+                          <User className="w-4 h-4" style={{ color: `hsl(${selectedMember.accentHsl})` }} />
+                          <span className="font-bold">نبذة</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <p className="text-muted-foreground leading-relaxed">{selectedMember.bio}</p>
+                      </AccordionContent>
+                    </AccordionItem>
+                  )}
+
+                  {selectedMember.experience.length > 0 && (
+                    <AccordionItem value="experience" className="border rounded-xl px-4 border-border">
+                      <AccordionTrigger className="hover:no-underline gap-3">
+                        <div className="flex items-center gap-3">
+                          <Briefcase className="w-4 h-4" style={{ color: `hsl(${selectedMember.accentHsl})` }} />
+                          <span className="font-bold">الخبرات</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <ul className="space-y-2">
+                          {selectedMember.experience.map((exp, i) => (
+                            <li key={i} className="flex items-start gap-2 text-muted-foreground">
+                              <span
+                                className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
+                                style={{ background: `hsl(${selectedMember.accentHsl})` }}
+                              />
+                              {exp}
+                            </li>
+                          ))}
+                        </ul>
+                      </AccordionContent>
+                    </AccordionItem>
+                  )}
+
+                  {selectedMember.skills.length > 0 && (
+                    <AccordionItem value="skills" className="border rounded-xl px-4 border-border">
+                      <AccordionTrigger className="hover:no-underline gap-3">
+                        <div className="flex items-center gap-3">
+                          <Wrench className="w-4 h-4" style={{ color: `hsl(${selectedMember.accentHsl})` }} />
+                          <span className="font-bold">المهارات</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedMember.skills.map((s, i) => (
+                            <span
+                              key={i}
+                              className="px-3 py-1.5 rounded-full text-xs font-bold"
+                              style={{
+                                background: `hsl(${selectedMember.accentHsl} / 0.1)`,
+                                color: `hsl(${selectedMember.accentHsl})`,
+                              }}
+                            >
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  )}
+
+                  <AccordionItem value="contact" className="border rounded-xl px-4 border-border">
                     <AccordionTrigger className="hover:no-underline gap-3">
                       <div className="flex items-center gap-3">
-                        <User className="w-4 h-4 text-primary" />
-                        <span className="font-bold">نبذة</span>
+                        <Phone className="w-4 h-4" style={{ color: `hsl(${selectedMember.accentHsl})` }} />
+                        <span className="font-bold">التواصل</span>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      <p className="text-muted-foreground leading-relaxed">{selectedMember.bio}</p>
-                    </AccordionContent>
-                  </AccordionItem>
-                )}
-
-                {selectedMember.experience.length > 0 && (
-                  <AccordionItem value="experience" className="border rounded-xl px-4 border-border">
-                    <AccordionTrigger className="hover:no-underline gap-3">
-                      <div className="flex items-center gap-3">
-                        <Briefcase className="w-4 h-4 text-primary" />
-                        <span className="font-bold">الخبرات</span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <ul className="space-y-2">
-                        {selectedMember.experience.map((exp, i) => (
-                          <li key={i} className="flex items-start gap-2 text-muted-foreground">
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                            {exp}
-                          </li>
-                        ))}
-                      </ul>
-                    </AccordionContent>
-                  </AccordionItem>
-                )}
-
-                {selectedMember.skills.length > 0 && (
-                  <AccordionItem value="skills" className="border rounded-xl px-4 border-border">
-                    <AccordionTrigger className="hover:no-underline gap-3">
-                      <div className="flex items-center gap-3">
-                        <Wrench className="w-4 h-4 text-primary" />
-                        <span className="font-bold">المهارات</span>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedMember.skills.map((s, i) => (
-                          <span
-                            key={i}
-                            className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold"
-                          >
-                            {s}
-                          </span>
-                        ))}
+                      <div className="space-y-3 text-muted-foreground">
+                        <div className="flex items-center gap-3">
+                          <Phone className="w-4 h-4" />
+                          <span dir="ltr">{selectedMember.phone || "سيتم الإضافة قريبًا"}</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                          <Mail className="w-4 h-4" />
+                          <span>{selectedMember.email || "سيتم الإضافة قريبًا"}</span>
+                        </div>
                       </div>
                     </AccordionContent>
                   </AccordionItem>
-                )}
-
-                <AccordionItem value="contact" className="border rounded-xl px-4 border-border">
-                  <AccordionTrigger className="hover:no-underline gap-3">
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-4 h-4 text-primary" />
-                      <span className="font-bold">التواصل</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="space-y-3 text-muted-foreground">
-                      <div className="flex items-center gap-3">
-                        <Phone className="w-4 h-4" />
-                        <span dir="ltr">{selectedMember.phone || "سيتم الإضافة قريبًا"}</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Mail className="w-4 h-4" />
-                        <span>{selectedMember.email || "سيتم الإضافة قريبًا"}</span>
-                      </div>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
+                </Accordion>
+              </div>
             </motion.div>
           </motion.div>
         )}
