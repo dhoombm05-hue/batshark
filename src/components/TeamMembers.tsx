@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { User, Briefcase, Star, Phone, Mail, ChevronLeft, X } from "lucide-react";
+import { User, Briefcase, Star, Phone, Mail, ChevronLeft, X, Wrench } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -13,76 +13,109 @@ interface MemberInfo {
   title: string;
   bio: string;
   experience: string[];
-  strengths: string[];
+  skills: string[];
   phone: string;
   email: string;
 }
 
 const members: MemberInfo[] = [
   {
-    name: "عبدالرحمن بن محبوب",
-    title: "الرئيس التنفيذي",
-    bio: "قائد استراتيجي يتمتع بخبرة واسعة في إدارة المشاريع الكبرى وتطوير الأعمال.",
+    name: "عبدالرحمن بن بندر محبوب",
+    title: "الرئيس التنفيذي / مدير العمليات",
+    bio: "",
     experience: [
-      "إدارة مشاريع متعددة القطاعات",
-      "تطوير استراتيجيات النمو المؤسسي",
-      "قيادة فرق عمل متعددة التخصصات",
+      "إدارة المشاريع الكبيرة والصغيرة بكفاءة عالية",
+      "خبرة في العمل الحر وتنفيذ المشاريع المستقلة",
+      "الإبداع وحل المشكلات",
+      "تحليل البيانات المعقدة",
+      "إدارة العلاقات مع العملاء والتواصل الفعّال",
     ],
-    strengths: ["القيادة الاستراتيجية", "التخطيط طويل المدى", "بناء الشراكات"],
-    phone: "",
-    email: "",
-  },
-  {
-    name: "محمد تركي الداود",
-    title: "نائب الرئيس التنفيذي",
-    bio: "خبير في تطوير الأعمال والعمليات التشغيلية بخبرة متميزة في السوق المحلي.",
-    experience: [
-      "تطوير العمليات التشغيلية",
-      "إدارة سلاسل التوريد",
-      "التفاوض وإبرام الصفقات",
+    skills: [
+      "الإنجليزية: متقدم",
+      "الفرنسية: مبتدئ",
+      "الإسبانية: مبتدئ",
     ],
-    strengths: ["الإدارة التشغيلية", "التفاوض الاحترافي", "تحليل السوق"],
-    phone: "",
-    email: "",
-  },
-  {
-    name: "نايف بن محمد المطيري",
-    title: "مدير التطوير",
-    bio: "متخصص في تطوير المشاريع الرياضية والترفيهية بمعايير عالمية.",
-    experience: [
-      "تطوير المشاريع الرياضية",
-      "إدارة المنشآت الترفيهية",
-      "الإشراف على التنفيذ",
-    ],
-    strengths: ["إدارة المشاريع", "الابتكار", "ضبط الجودة"],
-    phone: "",
-    email: "",
+    phone: "0560340081",
+    email: "dhoombm05@gmail.com",
   },
   {
     name: "فهد بن سلطان المحبوب",
-    title: "مدير العمليات",
-    bio: "خبير في العمليات اللوجستية وإدارة المشاريع التنفيذية.",
+    title: "نائب الرئيس التنفيذي – استراتيجي",
+    bio: "حاصل على ASA (زميل مشارك – جمعية الاكتواريين SOA)، ورائد أعمال أركز على بناء منتجات ومشاريع قابلة للنمو والتوسع بجودة عالية.",
     experience: [
-      "إدارة العمليات اللوجستية",
-      "تنسيق المشاريع التنفيذية",
-      "مراقبة الأداء والجودة",
+      "قيادة الاستراتيجية والتنفيذ في الشركات الناشئة",
+      "صياغة نماذج الأعمال وخارطة الطريق",
+      "توحيد الفرق والشركاء",
+      "اتخاذ القرارات المبنية على البيانات",
+      "بناء نماذج مالية قوية ودراسة المخاطر",
+      "العمل في شركة استشارية في دبي",
+      "إدارة أصحاب المصلحة ومنهجية عمل منظمة",
     ],
-    strengths: ["التنظيم والإدارة", "حل المشكلات", "الكفاءة التشغيلية"],
-    phone: "",
-    email: "",
+    skills: [],
+    phone: "0506191078",
+    email: "f.binsultan0@gmail.com",
   },
   {
-    name: "سعد بن سلطان المحبوب",
-    title: "مدير التسويق والمبيعات",
-    bio: "متخصص في التسويق الرقمي واستراتيجيات المبيعات الحديثة.",
+    name: "محمد تركي الداود",
+    title: "مدير عمليات / تصميم وتقنية",
+    bio: "طالب في تخصص علوم البناء والعمارة في جامعة الملك سعود، مهتم بتصميم المواقع واستخدام البرامج الحاسوبية في المشاريع العملية.",
     experience: [
-      "التسويق الرقمي والإعلاني",
-      "إدارة علاقات العملاء",
-      "تطوير استراتيجيات البيع",
+      "إنشاء مواقع إلكترونية",
+      "التصميم باستخدام البرامج الحاسوبية",
     ],
-    strengths: ["التسويق الاستراتيجي", "بناء العلامة التجارية", "خبرة سوقية واسعة"],
-    phone: "",
-    email: "",
+    skills: [
+      "التحدث باللغة الإنجليزية",
+      "تصميم وتحرير ملفات باللغة الإنجليزية",
+    ],
+    phone: "0501061221",
+    email: "mtm.aldawoud@gmail.com",
+  },
+  {
+    name: "سعد سلطان المحبوب",
+    title: "إدارة الأعمال والتسويق",
+    bio: "أعمل حاليًا في شركة BATSHARK في مجال إدارة الأعمال والتسويق، مع تركيز مستمر على بناء وتطوير العلاقات الاجتماعية والمهنية بما يدعم نمو الأعمال ويعزز حضور الشركة. أمتلك شغفًا بتطوير المشاريع وتحسين الأداء المؤسسي من خلال التخطيط والتحليل واتخاذ القرارات المبنية على البيانات.",
+    experience: [
+      "الإشراف الإداري في مؤسسة",
+      "تعزيز ولاء العملاء",
+      "تحسين خطة العمل",
+      "رفع مستوى رضا العملاء",
+      "دعم الموظفين وتحسين الأداء العام",
+      "مساعد إداري – Unicharm Global",
+      "التعامل المباشر مع الجمهور",
+      "تقديم خدمة عملاء راقية",
+      "تنظيم مواعيد المقابلات",
+      "تسهيل الإجراءات الإدارية",
+    ],
+    skills: [
+      "إدارة المشاريع (PMP)",
+      "التسويق",
+      "تحليل البيانات",
+      "مؤشرات الأداء (KPIs)",
+      "ICDL",
+      "Power BI",
+    ],
+    phone: "0581998195",
+    email: "s3d.snm@gmail.com",
+  },
+  {
+    name: "نايف محمد المطيري",
+    title: "التسويق والتقنية",
+    bio: "مهتم بالعمل التطبيقي وتطوير المهارات التقنية والتسويقية، وأسعى لبناء خبرة عملية حقيقية من خلال العمل على مشاريع متنوعة.",
+    experience: [
+      "العمل على مشاريع تسويق صغيرة ومتوسطة",
+      "تصميم مواقع واستخدام البرامج الحاسوبية",
+      "التعامل المباشر مع العملاء وتحويل احتياجاتهم إلى حلول عملية",
+    ],
+    skills: [
+      "تسويق رقمي للمشاريع المتوسطة",
+      "تحليل البيانات الأساسية",
+      "إجادة اللغة الإنجليزية",
+      "تصميم وتحرير المحتوى",
+      "استخدام البرامج الحاسوبية بكفاءة",
+      "مهارات تواصل وبناء علاقات مهنية",
+    ],
+    phone: "0555623241",
+    email: "nayf2011245.9@gmail.com",
   },
 ];
 
@@ -102,7 +135,6 @@ const TeamMembers = () => {
           <p className="text-muted-foreground text-lg">فريق إداري قوي ومنظّم</p>
         </motion.div>
 
-        {/* Members Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {members.map((member, index) => (
             <motion.button
@@ -144,7 +176,6 @@ const TeamMembers = () => {
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               className="bg-background rounded-3xl p-6 md:p-8 max-w-lg w-full shadow-elevated max-h-[85vh] overflow-y-auto"
             >
-              {/* Header */}
               <div className="flex items-start justify-between mb-6">
                 <div className="flex items-center gap-4">
                   <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -163,59 +194,64 @@ const TeamMembers = () => {
                 </button>
               </div>
 
-              {/* Progressive Disclosure via Accordion */}
               <Accordion type="single" collapsible className="space-y-2">
-                <AccordionItem value="bio" className="border rounded-xl px-4 border-border">
-                  <AccordionTrigger className="hover:no-underline gap-3">
-                    <div className="flex items-center gap-3">
-                      <User className="w-4 h-4 text-primary" />
-                      <span className="font-bold">نبذة عامة</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="text-muted-foreground leading-relaxed">{selectedMember.bio}</p>
-                  </AccordionContent>
-                </AccordionItem>
+                {selectedMember.bio && (
+                  <AccordionItem value="bio" className="border rounded-xl px-4 border-border">
+                    <AccordionTrigger className="hover:no-underline gap-3">
+                      <div className="flex items-center gap-3">
+                        <User className="w-4 h-4 text-primary" />
+                        <span className="font-bold">نبذة</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-muted-foreground leading-relaxed">{selectedMember.bio}</p>
+                    </AccordionContent>
+                  </AccordionItem>
+                )}
 
-                <AccordionItem value="experience" className="border rounded-xl px-4 border-border">
-                  <AccordionTrigger className="hover:no-underline gap-3">
-                    <div className="flex items-center gap-3">
-                      <Briefcase className="w-4 h-4 text-primary" />
-                      <span className="font-bold">الخبرات</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <ul className="space-y-2">
-                      {selectedMember.experience.map((exp, i) => (
-                        <li key={i} className="flex items-start gap-2 text-muted-foreground">
-                          <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                          {exp}
-                        </li>
-                      ))}
-                    </ul>
-                  </AccordionContent>
-                </AccordionItem>
+                {selectedMember.experience.length > 0 && (
+                  <AccordionItem value="experience" className="border rounded-xl px-4 border-border">
+                    <AccordionTrigger className="hover:no-underline gap-3">
+                      <div className="flex items-center gap-3">
+                        <Briefcase className="w-4 h-4 text-primary" />
+                        <span className="font-bold">الخبرات</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-2">
+                        {selectedMember.experience.map((exp, i) => (
+                          <li key={i} className="flex items-start gap-2 text-muted-foreground">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                            {exp}
+                          </li>
+                        ))}
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+                )}
 
-                <AccordionItem value="strengths" className="border rounded-xl px-4 border-border">
-                  <AccordionTrigger className="hover:no-underline gap-3">
-                    <div className="flex items-center gap-3">
-                      <Star className="w-4 h-4 text-primary" />
-                      <span className="font-bold">نقاط القوة</span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedMember.strengths.map((s, i) => (
-                        <span
-                          key={i}
-                          className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold"
-                        >
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
+                {selectedMember.skills.length > 0 && (
+                  <AccordionItem value="skills" className="border rounded-xl px-4 border-border">
+                    <AccordionTrigger className="hover:no-underline gap-3">
+                      <div className="flex items-center gap-3">
+                        <Wrench className="w-4 h-4 text-primary" />
+                        <span className="font-bold">المهارات</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedMember.skills.map((s, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold"
+                          >
+                            {s}
+                          </span>
+                        ))}
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                )}
 
                 <AccordionItem value="contact" className="border rounded-xl px-4 border-border">
                   <AccordionTrigger className="hover:no-underline gap-3">
@@ -228,7 +264,7 @@ const TeamMembers = () => {
                     <div className="space-y-3 text-muted-foreground">
                       <div className="flex items-center gap-3">
                         <Phone className="w-4 h-4" />
-                        <span>{selectedMember.phone || "سيتم الإضافة قريبًا"}</span>
+                        <span dir="ltr">{selectedMember.phone || "سيتم الإضافة قريبًا"}</span>
                       </div>
                       <div className="flex items-center gap-3">
                         <Mail className="w-4 h-4" />
