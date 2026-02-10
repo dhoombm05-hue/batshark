@@ -1,1 +1,4 @@
 project_id = "axssxxthhyvkaciopscb"
+
+[functions.manage-videos]
+verify_jwt = false

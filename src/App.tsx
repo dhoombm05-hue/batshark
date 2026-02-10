@@ -10,6 +10,7 @@ import PadelCourts from "./pages/PadelCourts";
 import Umbrix from "./pages/Umbrix";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
+import AdminVideos from "./pages/AdminVideos";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/umbrix" element={<Umbrix />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/admin/videos" element={<AdminVideos />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
