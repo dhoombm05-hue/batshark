@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { Monitor, Trophy, Sparkles, ArrowLeft, ChevronDown, Users } from "lucide-react";
+import { Monitor, Trophy, Sparkles, ArrowLeft, ChevronDown } from "lucide-react";
 import logo from "@/assets/logo.png";
 import heroDark from "@/assets/hero-dark.jpg";
+import TeamMembers from "@/components/TeamMembers";
 
 const sections = [
   {
@@ -32,17 +32,7 @@ const sections = [
   },
 ];
 
-const teamMembers = [
-  "عبدالرحمن بن محبوب",
-  "محمد بن محبوب",
-  "نايف بن محمد المطيري",
-  "فهد بن سلطان المحبوب",
-  "سعد بن سلطان المحبوب",
-];
-
 const Index = () => {
-  const [showTeam, setShowTeam] = useState(false);
-
   return (
     <>
       {/* Hero */}
@@ -143,21 +133,20 @@ const Index = () => {
               >
                 <Link
                   to={section.link}
-                  className={`group relative block p-8 rounded-2xl bg-card border border-border overflow-hidden transition-all duration-500 hover:shadow-elevated hover:border-${section.color}/30 hover:-translate-y-2`}
+                  className="group relative block p-8 rounded-2xl bg-card border border-border overflow-hidden transition-all duration-500 hover:shadow-elevated hover:-translate-y-2"
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br from-${section.color}/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                   <div className="relative z-10">
-                    <div className={`w-14 h-14 rounded-2xl bg-${section.color}/10 flex items-center justify-center mb-5 group-hover:bg-${section.color} group-hover:text-${section.color}-foreground transition-all duration-300`}>
+                    <div className="w-14 h-14 rounded-2xl bg-muted flex items-center justify-center mb-5 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
                       <section.icon className="w-7 h-7" />
                     </div>
-                    <p className={`text-xs font-bold tracking-widest uppercase text-${section.color} mb-2`}>
+                    <p className="text-xs font-bold tracking-widest uppercase text-primary mb-2">
                       {section.subtitle}
                     </p>
                     <h3 className="text-xl font-black text-foreground mb-2">{section.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed mb-5">
                       {section.description}
                     </p>
-                    <div className={`inline-flex items-center gap-2 text-sm font-bold text-${section.color} group-hover:gap-3 transition-all duration-300`}>
+                    <div className="inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all duration-300">
                       <span>اكتشف المزيد</span>
                       <ArrowLeft className="w-4 h-4" />
                     </div>
@@ -168,6 +157,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Team Members */}
+      <TeamMembers />
 
       {/* Brand Boost */}
       <section className="py-20 px-6 bg-foreground text-primary-foreground">
@@ -185,58 +177,9 @@ const Index = () => {
               <br />
               نقدم خدمات متكاملة بأعلى معايير الجودة والاحترافية.
             </p>
-            <button
-              onClick={() => setShowTeam(true)}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-primary-foreground/20 text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10 transition-all text-sm font-medium"
-            >
-              <Users className="w-4 h-4" />
-              أعضاء الشركة
-            </button>
           </motion.div>
         </div>
       </section>
-
-      {/* Team Modal */}
-      {showTeam && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/60 backdrop-blur-sm"
-          onClick={(e) => e.target === e.currentTarget && setShowTeam(false)}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="bg-background rounded-3xl p-8 max-w-md w-full shadow-elevated"
-          >
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="heading-md text-foreground">أعضاء الشركة</h3>
-              <button
-                onClick={() => setShowTeam(false)}
-                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="space-y-4">
-              {teamMembers.map((member, index) => (
-                <motion.div
-                  key={member}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.08 }}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-card border border-border"
-                >
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <span className="text-sm font-bold text-foreground">{index + 1}</span>
-                  </div>
-                  <span className="font-bold text-foreground">{member}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
 
       {/* CTA */}
       <section className="py-20 px-6 bg-card">
