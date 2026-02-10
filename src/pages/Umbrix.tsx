@@ -1,19 +1,19 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Sparkles, Shield, Droplets, Sun, Wind, CloudRain, Bug, Car,
+  Sparkles, Shield, Droplets, Sun, Wind, CloudRain, Cat, Car,
   ArrowLeft, Check
 } from "lucide-react";
 import umbrixLogo from "@/assets/umbrix-logo.jpg";
 import umbrixCar from "@/assets/umbrix-car.jpg";
+import ProjectVideos from "@/components/ProjectVideos";
 
 const protections = [
-  { icon: Sun, label: "الشمس" },
-  { icon: Droplets, label: "الحر" },
-  { icon: Shield, label: "البرد" },
-  { icon: CloudRain, label: "المطر" },
+  { icon: Sun, label: "أشعة الشمس" },
+  { icon: Cat, label: "القطط" },
+  { icon: CloudRain, label: "الأمطار" },
   { icon: Wind, label: "الغبار" },
-  { icon: Bug, label: "فضلات الطيور" },
+  { icon: Shield, label: "العواصف" },
 ];
 
 const specs = [
@@ -85,8 +85,8 @@ const Umbrix = () => {
               transition={{ delay: 0.4 }}
               className="text-primary-foreground/60 text-lg leading-relaxed mb-6 max-w-md"
             >
-              أفضل حل مبتكر لحماية سيارتك. لا غسيل للسيارة بعد اليوم.
-              حماية كاملة، تصميم ذكي، وسهولة استخدام.
+              حل مبتكر لحماية سيارتك في جميع الظروف، مصمم ليحمي سطح السيارة ويحافظ عليها يوميًا.
+              تصميم عملي، سهل الاستخدام، ويمنح سيارتك حماية مستمرة بدون عناء.
             </motion.p>
 
             <motion.div
@@ -124,11 +124,11 @@ const Umbrix = () => {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="heading-lg text-foreground mb-3">تحميها من</h2>
+            <h2 className="heading-lg text-foreground mb-3">تحمي سيارتك من</h2>
             <p className="text-muted-foreground text-lg">حماية شاملة لسيارتك على مدار السنة</p>
           </motion.div>
 
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-4 max-w-3xl mx-auto">
+          <div className="grid grid-cols-3 md:grid-cols-5 gap-4 max-w-3xl mx-auto">
             {protections.map((item, index) => (
               <motion.div
                 key={item.label}
@@ -185,6 +185,9 @@ const Umbrix = () => {
           </div>
         </div>
       </section>
+
+      {/* Videos Section */}
+      <ProjectVideos project="umbrix" title="شاهد Umbrix أثناء الاستخدام" accentColor="umbrix" />
 
       {/* Price CTA */}
       <section className="py-20 px-6 bg-foreground text-primary-foreground">

@@ -6,6 +6,7 @@ import {
   Sun, Award, ChevronLeft, Package
 } from "lucide-react";
 import padelHero from "@/assets/padel-court-hero.jpg";
+import ProjectVideos from "@/components/ProjectVideos";
 
 interface Court {
   id: string;
@@ -271,6 +272,9 @@ const PadelCourts = () => {
           </AnimatePresence>
         </div>
       </section>
+
+      {/* Videos Section */}
+      <ProjectVideos project="padel" title="شاهد الملاعب على أرض الواقع" accentColor="padel" />
     </>
   );
 };
