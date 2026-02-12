@@ -16,30 +16,51 @@ export type Database = {
     Tables: {
       ad_requests: {
         Row: {
+          ad_link: string | null
           ad_name: string
+          ad_type: string | null
           advertiser_name: string
+          brand_name: string | null
           created_at: string
           duration: string | null
+          email: string | null
           id: string
           notes: string | null
+          phone: string | null
+          screen_location: string | null
+          screens_count: number | null
           store_link: string | null
         }
         Insert: {
+          ad_link?: string | null
           ad_name: string
+          ad_type?: string | null
           advertiser_name: string
+          brand_name?: string | null
           created_at?: string
           duration?: string | null
+          email?: string | null
           id?: string
           notes?: string | null
+          phone?: string | null
+          screen_location?: string | null
+          screens_count?: number | null
           store_link?: string | null
         }
         Update: {
+          ad_link?: string | null
           ad_name?: string
+          ad_type?: string | null
           advertiser_name?: string
+          brand_name?: string | null
           created_at?: string
           duration?: string | null
+          email?: string | null
           id?: string
           notes?: string | null
+          phone?: string | null
+          screen_location?: string | null
+          screens_count?: number | null
           store_link?: string | null
         }
         Relationships: []
