@@ -2,3 +2,6 @@ project_id = "axssxxthhyvkaciopscb"
 
 [functions.manage-videos]
 verify_jwt = false
+
+[functions.send-ad-email]
+verify_jwt = false
