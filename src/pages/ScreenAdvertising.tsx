@@ -93,7 +93,7 @@ const ScreenAdvertising = () => {
     setLoading(true);
     try {
       // Save to database
-      const { data: inserted, error: dbError } = await supabase.from("ad_requests").insert({
+      const { error: dbError } = await supabase.from("ad_requests").insert({
         advertiser_name: form.advertiser_name.trim(),
         ad_name: `إعلان ${form.ad_type} - ${form.advertiser_name.trim()}`,
         phone: form.phone.trim(),
@@ -109,34 +109,16 @@ const ScreenAdvertising = () => {
           hasBarcode && form.barcode ? `باركود: ${form.barcode}` : "",
           form.notes || "",
         ].filter(Boolean).join("\n") || null,
-      }).select("id").single();
+      });
       if (dbError) throw dbError;
 
-      // Send email via Zapier webhook (non-blocking)
-      supabase.functions.invoke("send-ad-email", {
-        body: {
-          request_id: inserted?.id || "N/A",
-          advertiser_name: form.advertiser_name.trim(),
-          phone: form.phone.trim(),
-          email: form.email.trim(),
-          brand_name: form.brand_name.trim() || null,
-          screen_location: form.screen_location,
-          screens_count: form.screens_count,
-          duration: form.duration,
-          ad_type: form.ad_type,
-          ad_link: form.ad_link.trim(),
-          store_link: form.store_link.trim() || null,
-          notes: form.notes || null,
-        },
-      }).catch((err) => console.error("Zapier email error:", err));
-
-      // Open WhatsApp with the message
+      // Open WhatsApp directly with the message
       const whatsappUrl = `https://wa.me/966560340081?text=${buildWhatsAppMessage()}`;
       window.open(whatsappUrl, "_blank");
 
       toast({
         title: "✅ تم استلام طلبك بنجاح",
-        description: "سيتم التواصل معك خلال 24 ساعة لإرسال السعر",
+        description: "سيتم فتح واتساب لإرسال الطلب مباشرة",
       });
       setForm({ advertiser_name: "", phone: "", email: "", brand_name: "", screen_location: "مركز كهف النحلة", screens_count: 1, duration: "", ad_type: "", ad_link: "", store_link: "", barcode: "", notes: "" });
       setHasBarcode(false);
