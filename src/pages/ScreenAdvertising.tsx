@@ -112,6 +112,23 @@ const ScreenAdvertising = () => {
       });
       if (dbError) throw dbError;
 
+      // Send email notification (non-blocking)
+      supabase.functions.invoke("send-ad-email", {
+        body: {
+          advertiser_name: form.advertiser_name.trim(),
+          phone: form.phone.trim(),
+          email: form.email.trim(),
+          brand_name: form.brand_name.trim() || null,
+          screen_location: form.screen_location,
+          screens_count: form.screens_count,
+          duration: form.duration,
+          ad_type: form.ad_type,
+          ad_link: form.ad_link.trim(),
+          store_link: form.store_link.trim() || null,
+          notes: form.notes || null,
+        },
+      }).catch((err) => console.error("Email notification error:", err));
+
       // Open WhatsApp directly with the message
       const whatsappUrl = `https://wa.me/966560340081?text=${buildWhatsAppMessage()}`;
       window.open(whatsappUrl, "_blank");
