@@ -65,6 +65,45 @@ export type Database = {
         }
         Relationships: []
       }
+      business_sections: {
+        Row: {
+          created_at: string
+          description_ar: string | null
+          id: string
+          is_visible: boolean
+          name_ar: string
+          name_en: string
+          route: string
+          slug: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description_ar?: string | null
+          id?: string
+          is_visible?: boolean
+          name_ar: string
+          name_en: string
+          route: string
+          slug: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description_ar?: string | null
+          id?: string
+          is_visible?: boolean
+          name_ar?: string
+          name_en?: string
+          route?: string
+          slug?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           created_at: string
@@ -92,6 +131,60 @@ export type Database = {
           name?: string
           phone?: string | null
           subject?: string | null
+        }
+        Relationships: []
+      }
+      padel_courts: {
+        Row: {
+          court_id: string
+          created_at: string
+          dimensions: string
+          frame: string
+          glass: string
+          id: string
+          name: string
+          origin: string
+          price: number
+          sort_order: number
+          tag: string
+          turf: string
+          updated_at: string
+          usage_type: string
+          warranty: string
+        }
+        Insert: {
+          court_id: string
+          created_at?: string
+          dimensions?: string
+          frame: string
+          glass: string
+          id?: string
+          name: string
+          origin: string
+          price: number
+          sort_order?: number
+          tag: string
+          turf: string
+          updated_at?: string
+          usage_type: string
+          warranty: string
+        }
+        Update: {
+          court_id?: string
+          created_at?: string
+          dimensions?: string
+          frame?: string
+          glass?: string
+          id?: string
+          name?: string
+          origin?: string
+          price?: number
+          sort_order?: number
+          tag?: string
+          turf?: string
+          updated_at?: string
+          usage_type?: string
+          warranty?: string
         }
         Relationships: []
       }
@@ -125,6 +218,30 @@ export type Database = {
           title?: string
           video_type?: string
           youtube_url?: string | null
+        }
+        Relationships: []
+      }
+      site_images: {
+        Row: {
+          id: string
+          image_url: string
+          page: string
+          section: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          image_url: string
+          page: string
+          section: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          image_url?: string
+          page?: string
+          section?: string
+          updated_at?: string
         }
         Relationships: []
       }
