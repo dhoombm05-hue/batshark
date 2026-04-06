@@ -55,6 +55,9 @@ const Footer = () => {
           <p className="text-primary-foreground/50 text-sm">
             © {new Date().getFullYear()} BATSHARK. جميع الحقوق محفوظة
           </p>
+          <Link to="/admin" className="text-primary-foreground/20 hover:text-primary-foreground/50 text-xs mt-2 inline-block transition-colors">
+            لوحة التحكم
+          </Link>
         </div>
       </div>
     </footer>
