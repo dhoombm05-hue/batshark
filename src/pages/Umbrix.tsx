@@ -1,11 +1,15 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   Sparkles, Shield, Droplets, Sun, Wind, CloudRain, Cat, Car,
-  ArrowLeft, Check
+  ArrowLeft, Check, Loader2
 } from "lucide-react";
-import umbrixLogo from "@/assets/umbrix-logo.jpg";
-import umbrixCar from "@/assets/umbrix-car.jpg";
+import { supabase } from "@/integrations/supabase/client";
+import EditableImage from "@/components/admin/EditableImage";
+import EditablePrice from "@/components/admin/EditablePrice";
+import umbrixLogoFallback from "@/assets/umbrix-logo.jpg";
+import umbrixCarFallback from "@/assets/umbrix-car.jpg";
 import ProjectVideos from "@/components/ProjectVideos";
 
 const protections = [
@@ -36,13 +40,68 @@ const specs = [
 ];
 
 const Umbrix = () => {
+  const [heroImage, setHeroImage] = useState(umbrixCarFallback);
+  const [logoImage, setLogoImage] = useState(umbrixLogoFallback);
+  const [price, setPrice] = useState(1950);
+  const [priceId, setPriceId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const load = async () => {
+      // Load images
+      const { data: images } = await supabase
+        .from("site_images")
+        .select("*")
+        .eq("page", "umbrix");
+      
+      if (images) {
+        const hero = images.find(i => i.section === "hero");
+        const logo = images.find(i => i.section === "logo");
+        if (hero?.image_url) setHeroImage(hero.image_url);
+        if (logo?.image_url) setLogoImage(logo.image_url);
+      }
+
+      // Load price from site_images (using section "price" to store it)
+      const { data: priceData } = await supabase
+        .from("site_images")
+        .select("*")
+        .eq("page", "umbrix")
+        .eq("section", "price")
+        .maybeSingle();
+      
+      if (priceData) {
+        setPriceId(priceData.id);
+        const parsed = Number(priceData.image_url);
+        if (!isNaN(parsed)) setPrice(parsed);
+      }
+
+      setLoading(false);
+    };
+    load();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-umbrix" />
+      </section>
+    );
+  }
+
   return (
     <>
       {/* Hero with car image */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={umbrixCar} alt="Umbrix" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-l from-foreground/90 via-foreground/70 to-foreground/40" />
+          <EditableImage
+            page="umbrix"
+            section="hero"
+            currentSrc={heroImage}
+            alt="Umbrix"
+            className="w-full h-full object-cover"
+            onUpdated={setHeroImage}
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-foreground/90 via-foreground/70 to-foreground/40 pointer-events-none" />
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
@@ -54,7 +113,14 @@ const Umbrix = () => {
               className="mb-6"
             >
               <div className="inline-block p-4 rounded-2xl bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/10 mb-4">
-                <img src={umbrixLogo} alt="Umbrix" className="h-20 w-auto rounded-lg" />
+                <EditableImage
+                  page="umbrix"
+                  section="logo"
+                  currentSrc={logoImage}
+                  alt="Umbrix"
+                  className="h-20 w-auto rounded-lg"
+                  onUpdated={setLogoImage}
+                />
               </div>
             </motion.div>
 
@@ -148,7 +214,7 @@ const Umbrix = () => {
         </div>
       </section>
 
-      {/* Specs — Compact */}
+      {/* Specs */}
       <section className="py-16 px-6 bg-card">
         <div className="container mx-auto">
           <motion.div
@@ -200,8 +266,16 @@ const Umbrix = () => {
             <Sparkles className="w-8 h-8 text-umbrix mx-auto mb-4" />
             <h2 className="heading-lg mb-4">السعر</h2>
             <div className="mb-2">
-              <span className="text-6xl md:text-8xl font-black text-umbrix">1,950</span>
-              <span className="text-2xl text-primary-foreground/60 mr-2">ريال</span>
+              <EditablePrice
+                table="site_images"
+                id={priceId || ""}
+                field="image_url"
+                value={price}
+                onUpdated={setPrice}
+              >
+                <span className="text-6xl md:text-8xl font-black text-umbrix">{price.toLocaleString("en-US")}</span>
+                <span className="text-2xl text-primary-foreground/60 mr-2">ريال</span>
+              </EditablePrice>
             </div>
             <p className="text-primary-foreground/50 text-lg mb-4">سعر رمزي — حماية كاملة لسيارتك</p>
 

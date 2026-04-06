@@ -6,6 +6,8 @@ import {
   Sun, Award, ChevronLeft, Package, Loader2
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import EditableImage from "@/components/admin/EditableImage";
+import EditablePrice from "@/components/admin/EditablePrice";
 import padelHeroFallback from "@/assets/padel-court-hero.jpg";
 import ProjectVideos from "@/components/ProjectVideos";
 
@@ -58,7 +60,6 @@ const PadelCourts = () => {
 
   useEffect(() => {
     const load = async () => {
-      // Load courts from DB
       const { data: courtsData } = await supabase
         .from("padel_courts")
         .select("*")
@@ -66,7 +67,6 @@ const PadelCourts = () => {
         .order("sort_order");
       if (courtsData) setCourts(courtsData as Court[]);
 
-      // Load hero image
       const { data: imgData } = await supabase
         .from("site_images")
         .select("image_url")
@@ -99,6 +99,11 @@ const PadelCourts = () => {
     warranty: court.warranty,
   });
 
+  const handlePriceUpdate = (courtId: string, newPrice: number) => {
+    setCourts(prev => prev.map(c => c.id === courtId ? { ...c, price: newPrice } : c));
+    if (selectedCourt?.id === courtId) setSelectedCourt({ ...selectedCourt, price: newPrice });
+  };
+
   if (loading) {
     return (
       <section className="min-h-screen flex items-center justify-center">
@@ -112,8 +117,15 @@ const PadelCourts = () => {
       {/* Hero */}
       <section className="relative pt-28 pb-20 px-6 overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="ملاعب بادل" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-foreground/75" />
+          <EditableImage
+            page="padel"
+            section="hero"
+            currentSrc={heroImage}
+            alt="ملاعب بادل"
+            className="w-full h-full object-cover"
+            onUpdated={setHeroImage}
+          />
+          <div className="absolute inset-0 bg-foreground/75 pointer-events-none" />
         </div>
         <div className="container mx-auto relative z-10 text-center">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -239,10 +251,18 @@ const PadelCourts = () => {
                       <span className="text-sm font-bold text-padel">السعر النهائي الشامل</span>
                     </div>
                     <div className="mb-4">
-                      <span className="text-5xl md:text-7xl font-black">
-                        <PriceCounter value={selectedCourt.price} />
-                      </span>
-                      <span className="text-xl text-primary-foreground/70 mr-2">ريال</span>
+                      <EditablePrice
+                        table="padel_courts"
+                        id={selectedCourt.id}
+                        field="price"
+                        value={selectedCourt.price}
+                        onUpdated={(v) => handlePriceUpdate(selectedCourt.id, v)}
+                      >
+                        <span className="text-5xl md:text-7xl font-black">
+                          <PriceCounter value={selectedCourt.price} />
+                        </span>
+                        <span className="text-xl text-primary-foreground/70 mr-2">ريال</span>
+                      </EditablePrice>
                     </div>
                     <div className="flex flex-wrap justify-center gap-2 mb-6">
                       {["التصنيع", "الشحن", "الجمارك", "التوصيل", "التركيب"].map((item) => (
