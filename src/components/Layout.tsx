@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import AdminBar from "./admin/AdminBar";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -7,6 +8,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <Navbar />
       <main className="page-transition">{children}</main>
       <Footer />
+      <AdminBar />
     </div>
   );
 };
