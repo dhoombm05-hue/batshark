@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Monitor, Trophy, Sparkles, ArrowLeft, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import EditableImage from "@/components/admin/EditableImage";
 import logo from "@/assets/logo.png";
 import heroDarkFallback from "@/assets/hero-dark.jpg";
 
@@ -75,8 +76,15 @@ const Index = () => {
       {/* Hero */}
       <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={heroImage} alt="" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-foreground/70" />
+          <EditableImage
+            page="index"
+            section="hero"
+            currentSrc={heroImage}
+            alt="خلفية الرئيسية"
+            className="w-full h-full object-cover"
+            onUpdated={setHeroImage}
+          />
+          <div className="absolute inset-0 bg-foreground/70 pointer-events-none" />
         </div>
         <div className="container mx-auto px-6 relative z-10 text-center">
           <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="mb-6">
