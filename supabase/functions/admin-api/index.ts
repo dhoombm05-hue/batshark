@@ -122,6 +122,14 @@ Deno.serve(async (req) => {
         return json({ success: true });
       }
 
+      case "update_site_image": {
+        const { id, ...updates } = data;
+        updates.updated_at = new Date().toISOString();
+        const { error } = await supabase.from("site_images").update(updates).eq("id", id);
+        if (error) throw error;
+        return json({ success: true });
+      }
+
       // ===== UPLOAD SIGNED URL =====
       case "get_upload_url": {
         const { fileName } = data;

@@ -22,7 +22,7 @@ const EditablePrice = ({ table, id, field, value, onUpdated, className = "", chi
 
   const actionMap: Record<string, string> = {
     padel_courts: "update_court",
-    site_settings: "update_setting",
+    site_images: "update_site_image",
   };
 
   const handleSave = async () => {
