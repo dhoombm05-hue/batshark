@@ -269,11 +269,10 @@ const Umbrix = () => {
               السعر شامل التركيب والشحن والجمارك والتوصيل
             </p>
 
-            <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+            <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto mb-12">
               {[
                 { size: "صغير", price: 2000, label: "S" },
-                { size: "وسط", price: 2200, label: "M" },
-                { size: "كبير", price: 2500, label: "L" },
+                { size: "كبير", price: 2300, label: "L" },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}
@@ -282,12 +281,12 @@ const Umbrix = () => {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                   className={`relative p-8 rounded-2xl border transition-all ${
-                    i === 2
+                    i === 1
                       ? "border-umbrix bg-umbrix/10 scale-105"
                       : "border-primary-foreground/10 bg-primary-foreground/5"
                   }`}
                 >
-                  {i === 2 && (
+                  {i === 1 && (
                     <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-umbrix text-umbrix-foreground text-xs font-bold">
                       الأكثر طلباً
                     </span>
