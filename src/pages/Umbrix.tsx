@@ -255,7 +255,7 @@ const Umbrix = () => {
       {/* Videos Section */}
       <ProjectVideos project="umbrix" title="شاهد Umbrix أثناء الاستخدام" accentColor="umbrix" />
 
-      {/* Price CTA */}
+      {/* Sizes & Pricing */}
       <section className="py-20 px-6 bg-foreground text-primary-foreground">
         <div className="container mx-auto text-center">
           <motion.div
@@ -264,24 +264,49 @@ const Umbrix = () => {
             viewport={{ once: true }}
           >
             <Sparkles className="w-8 h-8 text-umbrix mx-auto mb-4" />
-            <h2 className="heading-lg mb-4">السعر</h2>
-            <div className="mb-2">
-              <EditablePrice
-                table="site_images"
-                id={priceId || ""}
-                field="image_url"
-                value={price}
-                onUpdated={setPrice}
-              >
-                <span className="text-6xl md:text-8xl font-black text-umbrix">{price.toLocaleString("en-US")}</span>
-                <span className="text-2xl text-primary-foreground/60 mr-2">ريال</span>
-              </EditablePrice>
-            </div>
-            <p className="text-primary-foreground/50 text-lg mb-4">سعر رمزي — حماية كاملة لسيارتك</p>
+            <h2 className="heading-lg mb-3">المقاسات والأسعار</h2>
+            <p className="text-primary-foreground/50 text-lg mb-10">
+              السعر شامل التركيب والشحن والجمارك والتوصيل
+            </p>
 
-            <div className="flex flex-col gap-2 max-w-md mx-auto mb-10 text-primary-foreground/60 text-sm">
-              <p>📲 للاستفسار والتفاصيل يتم التواصل عبر واتساب</p>
-              <p>⚡ حل عملي وسريع التركيب للاستخدام اليومي</p>
+            <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-12">
+              {[
+                { size: "صغير", price: 2000, label: "S" },
+                { size: "وسط", price: 2200, label: "M" },
+                { size: "كبير", price: 2500, label: "L" },
+              ].map((item, i) => (
+                <motion.div
+                  key={item.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className={`relative p-8 rounded-2xl border transition-all ${
+                    i === 2
+                      ? "border-umbrix bg-umbrix/10 scale-105"
+                      : "border-primary-foreground/10 bg-primary-foreground/5"
+                  }`}
+                >
+                  {i === 2 && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-umbrix text-umbrix-foreground text-xs font-bold">
+                      الأكثر طلباً
+                    </span>
+                  )}
+                  <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary-foreground/10 text-primary-foreground font-black text-lg mb-4">
+                    {item.label}
+                  </span>
+                  <h3 className="text-xl font-bold text-primary-foreground mb-2">{item.size}</h3>
+                  <div className="mb-4">
+                    <span className="text-4xl md:text-5xl font-black text-umbrix">{item.price.toLocaleString("en-US")}</span>
+                    <span className="text-lg text-primary-foreground/60 mr-2">ريال</span>
+                  </div>
+                  <ul className="text-sm text-primary-foreground/50 space-y-1">
+                    <li>✅ التركيب</li>
+                    <li>✅ الشحن والجمارك</li>
+                    <li>✅ التوصيل</li>
+                  </ul>
+                </motion.div>
+              ))}
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
