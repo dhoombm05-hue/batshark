@@ -184,7 +184,7 @@ const ContactUs = () => {
               </a>
 
               <a
-                href="mailto:sharkshark1030@gmail.com"
+                href="mailto:messidhoom291@gmail.com"
                 className="flex items-center gap-4 p-5 rounded-2xl bg-card border border-border hover:border-foreground/20 hover:shadow-card transition-all group"
               >
                 <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center group-hover:bg-foreground group-hover:text-primary-foreground transition-colors">
@@ -192,7 +192,7 @@ const ContactUs = () => {
                 </div>
                 <div>
                   <h4 className="font-bold">البريد الإلكتروني</h4>
-                  <p className="text-muted-foreground">sharkshark1030@gmail.com</p>
+                  <p className="text-muted-foreground">messidhoom291@gmail.com</p>
                 </div>
               </a>
 

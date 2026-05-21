@@ -43,9 +43,9 @@ const Footer = () => {
                 <MessageCircle className="w-4 h-4" />
                 <span>واتساب</span>
               </a>
-              <a href="mailto:sharkshark1030@gmail.com" className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground text-sm transition-colors">
+              <a href="mailto:messidhoom291@gmail.com" className="flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground text-sm transition-colors">
                 <Mail className="w-4 h-4" />
-                <span>sharkshark1030@gmail.com</span>
+                <span>messidhoom291@gmail.com</span>
               </a>
             </div>
           </div>
