@@ -19,11 +19,28 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const SPLASH_KEY = "batshark_splash_shown";
+
 const App = () => {
-  const [splashDone, setSplashDone] = useState(false);
+  const [splashDone, setSplashDone] = useState(() => {
+    try {
+      return sessionStorage.getItem(SPLASH_KEY) === "1";
+    } catch {
+      return false;
+    }
+  });
+
+  const handleSplashComplete = () => {
+    try {
+      sessionStorage.setItem(SPLASH_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+    setSplashDone(true);
+  };
 
   if (!splashDone) {
-    return <SplashScreen onComplete={() => setSplashDone(true)} />;
+    return <SplashScreen onComplete={handleSplashComplete} />;
   }
 
   return (

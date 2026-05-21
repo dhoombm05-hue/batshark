@@ -102,7 +102,7 @@ Deno.serve(async (req) => {
       },
       body: JSON.stringify({
         from: "Bat Shark <onboarding@resend.dev>",
-        to: ["sharkshark1030@gmail.com"],
+        to: ["messidhoom291@gmail.com"],
         subject: `طلب إعلان جديد – ${advertiser_name}`,
         html: htmlBody,
       }),
