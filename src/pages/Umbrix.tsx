@@ -271,8 +271,8 @@ const Umbrix = () => {
 
             <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto mb-12">
               {[
-                { size: "صغير", price: 2000, label: "S" },
-                { size: "كبير", price: 2300, label: "L" },
+                { size: "صغير", price: 2200, label: "S" },
+                { size: "كبير", price: 2600, label: "L" },
               ].map((item, i) => (
                 <motion.div
                   key={item.label}
