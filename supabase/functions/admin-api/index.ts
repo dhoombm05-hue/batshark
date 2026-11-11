@@ -100,6 +100,26 @@ Deno.serve(async (req) => {
         return json({ success: true });
       }
 
+      // ===== TEAM =====
+      case "get_team": {
+        const { data: team, error } = await supabase.from("team_members").select("*").order("sort_order");
+        if (error) throw error;
+        return json({ team });
+      }
+      case "upsert_member": {
+        data.updated_at = new Date().toISOString();
+        const { error } = data.id
+          ? await supabase.from("team_members").update(data).eq("id", data.id)
+          : await supabase.from("team_members").insert(data);
+        if (error) throw error;
+        return json({ success: true });
+      }
+      case "delete_member": {
+        const { error } = await supabase.from("team_members").delete().eq("id", data.id);
+        if (error) throw error;
+        return json({ success: true });
+      }
+
       // ===== SITE IMAGES =====
       case "get_images": {
         const { data: images, error } = await supabase.from("site_images").select("*");

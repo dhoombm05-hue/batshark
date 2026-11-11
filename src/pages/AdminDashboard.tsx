@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Lock, LogOut, Trophy, Image, Layers, Loader2 } from "lucide-react";
+import { Lock, LogOut, Trophy, Image, Layers, Loader2, Users } from "lucide-react";
 import { useAdmin } from "@/contexts/AdminContext";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -8,11 +8,13 @@ import { useToast } from "@/hooks/use-toast";
 import AdminCourts from "@/components/admin/AdminCourts";
 import AdminSections from "@/components/admin/AdminSections";
 import AdminImages from "@/components/admin/AdminImages";
+import AdminTeam from "@/components/admin/AdminTeam";
 
 const tabs = [
   { id: "courts", label: "ملاعب البادل", icon: Trophy },
   { id: "sections", label: "أقسام الأعمال", icon: Layers },
   { id: "images", label: "الصور والخلفيات", icon: Image },
+  { id: "team", label: "فريق العمل", icon: Users },
 ];
 
 const AdminDashboard = () => {
@@ -101,6 +103,7 @@ const AdminDashboard = () => {
         {activeTab === "courts" && <AdminCourts />}
         {activeTab === "sections" && <AdminSections />}
         {activeTab === "images" && <AdminImages />}
+        {activeTab === "team" && <AdminTeam />}
       </div>
     </section>
   );

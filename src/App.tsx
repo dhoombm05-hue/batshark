@@ -9,7 +9,8 @@ import Layout from "./components/Layout";
 import SplashScreen from "./components/SplashScreen";
 import Index from "./pages/Index";
 import ScreenAdvertising from "./pages/ScreenAdvertising";
-import PadelCourts from "./pages/PadelCourts";
+import PadelBS from "./pages/PadelBS";
+import BatRealEstate from "./pages/BatRealEstate";
 import Umbrix from "./pages/Umbrix";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
@@ -54,7 +55,8 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/screen-advertising" element={<ScreenAdvertising />} />
-                <Route path="/padel-courts" element={<PadelCourts />} />
+                <Route path="/padel-courts" element={<PadelBS />} />
+                <Route path="/bat-real-estate" element={<BatRealEstate />} />
                 <Route path="/umbrix" element={<Umbrix />} />
                 <Route path="/about" element={<AboutUs />} />
                 <Route path="/contact" element={<ContactUs />} />
