@@ -245,6 +245,51 @@ export type Database = {
         }
         Relationships: []
       }
+      team_members: {
+        Row: {
+          bio: string
+          created_at: string
+          email: string
+          experience: string[]
+          id: string
+          is_trainee: boolean
+          name: string
+          phone: string
+          skills: string[]
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          bio?: string
+          created_at?: string
+          email?: string
+          experience?: string[]
+          id?: string
+          is_trainee?: boolean
+          name: string
+          phone?: string
+          skills?: string[]
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Update: {
+          bio?: string
+          created_at?: string
+          email?: string
+          experience?: string[]
+          id?: string
+          is_trainee?: boolean
+          name?: string
+          phone?: string
+          skills?: string[]
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
