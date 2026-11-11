@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Monitor, Trophy, Sparkles, ArrowLeft, Loader2 } from "lucide-react";
+import { Monitor, Trophy, Sparkles, ArrowLeft, Loader2, Building2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import EditableImage from "@/components/admin/EditableImage";
 import logo from "@/assets/logo.png";
@@ -11,6 +11,7 @@ const iconMap: Record<string, typeof Trophy> = {
   "padel-courts": Trophy,
   "screen-advertising": Monitor,
   "umbrix": Sparkles,
+  "bat-real-estate": Building2,
 };
 
 const colorMap: Record<string, { bg: string; text: string; border: string; iconBg: string; btnBg: string; btnText: string }> = {
@@ -19,6 +20,10 @@ const colorMap: Record<string, { bg: string; text: string; border: string; iconB
     iconBg: "bg-padel/10 group-hover:bg-padel", btnBg: "bg-padel", btnText: "text-padel-foreground",
   },
   "screen-advertising": {
+    bg: "bg-digital/5", text: "text-digital", border: "border-digital/20 hover:border-digital/50",
+    iconBg: "bg-digital/10 group-hover:bg-digital", btnBg: "bg-digital", btnText: "text-digital-foreground",
+  },
+  "bat-real-estate": {
     bg: "bg-digital/5", text: "text-digital", border: "border-digital/20 hover:border-digital/50",
     iconBg: "bg-digital/10 group-hover:bg-digital", btnBg: "bg-digital", btnText: "text-digital-foreground",
   },
@@ -97,7 +102,7 @@ const Index = () => {
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.5 }}
             className="text-primary-foreground/50 text-base md:text-lg max-w-xl mx-auto">
-            شركة متخصصة في الحلول الذكية — من الإعلانات الرقمية إلى المشاريع الرياضية والحلول المبتكرة
+            شركة سعودية تجمع أنشطة متنوعة تحت مظلة واحدة — من عالم البادل إلى التسويق والوساطة العقارية
           </motion.p>
         </div>
       </section>
@@ -106,8 +111,8 @@ const Index = () => {
       <section className="py-16 px-6 bg-background">
         <div className="container mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
-            <h2 className="heading-lg text-foreground mb-2">مشاريعنا</h2>
-            <p className="text-muted-foreground">اختر المشروع الذي يهمك</p>
+            <h2 className="heading-lg text-foreground mb-2">أنشطتنا</h2>
+            <p className="text-muted-foreground">تعرّف على أعمال الشركة وكيف نعمل</p>
           </motion.div>
 
           {loading ? (
@@ -127,7 +132,7 @@ const Index = () => {
                       <h3 className="text-xl font-black text-foreground mb-2">{section.name_ar}</h3>
                       <p className="text-muted-foreground text-sm leading-relaxed mb-6">{section.description_ar}</p>
                       <div className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full ${colors.btnBg} ${colors.btnText} text-sm font-bold group-hover:gap-3 transition-all duration-300`}>
-                        <span>الدخول</span>
+                        <span>تعرّف أكثر</span>
                         <ArrowLeft className="w-4 h-4" />
                       </div>
                     </Link>
